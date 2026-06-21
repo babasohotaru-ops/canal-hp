@@ -1,383 +1,79 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株式会社アイシーエル様｜Canal AI研修 特別ご提案</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background-color: #0a1628;
-      color: #e8e8e8;
-      font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
-      line-height: 1.8;
-      font-size: 16px;
-    }
-    a {
-      color: #c9a227;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>株式会社アイシーエル様へ｜Canal AI研修 特別ご提案</title>
+<style>
+body{margin:0;background:#0a1628;color:#e8e8e8;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8}
+.wrap{max-width:680px;margin:0 auto;padding:24px 20px}
+.gold{color:#c9a227}
+h1{font-size:clamp(22px,5vw,34px);font-weight:900;line-height:1.3;margin-bottom:16px}
+h2{font-size:20px;border-left:4px solid #c9a227;padding-left:12px;margin:40px 0 16px}
+.badge{display:inline-block;background:#c9a227;color:#0a1628;font-size:11px;font-weight:bold;padding:4px 12px;border-radius:20px;letter-spacing:1px;margin-bottom:20px}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(201,162,39,0.3);border-radius:12px;padding:20px;margin-bottom:16px}
+.cta{display:block;text-align:center;background:#c9a227;color:#0a1628;font-size:18px;font-weight:900;padding:20px;border-radius:12px;text-decoration:none;margin:40px 0}
+.price{font-size:36px;font-weight:900;color:#c9a227}
+footer{text-align:center;font-size:12px;color:rgba(255,255,255,0.4);padding:40px 0 20px;border-top:1px solid rgba(255,255,255,0.1);margin-top:40px}
+.scenario-icon{font-size:28px;margin-bottom:8px}
+.tag{display:inline-block;background:rgba(201,162,39,0.15);color:#c9a227;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:20px;margin-bottom:10px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="badge">CANAL AI × 株式会社アイシーエル様 特別ご提案</span>
+  <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference=AaVGc3nJcORhESkzGosMPQqluTuTSjMvHRolAehwRCEfd_kvBrFAXSK2-hL9thpi65fx3VdccqC8PybNxVI9zy__pRulvX4gL92SN_SKNX91hGg_LUUHOHv3CkXHFnoQC9-dea2hXw49ULRTUsHyLwpMZfIBU-c34z0EsOxSsQDECajhm2_WIehTYjCZz--37V3c_lTrnmCxvnbwrtBArxw_jT09hmMSiR7QNDunvu7LnoFXmkE6u2wvVGMz5OUOtoxBXyYnb1pVKfW4Om-qXIiAE0sm51fnTOoFars0fhJR0jDQXro5e0Nl_LMsIGYuqYiYQqwIqJ7B-OcDyMeejkybYFcELnbgmwlcnL_RL3jA4MFSJFdaEsDCCISiesFuMaBzK3UUeERwn1r6e2PNrWM42uLghXYPuZqvqTf26b-ekuVXbA&key=AIzaSyBX42yFRcaCNKCcStSDg_hVeb1V9v-gxIc" style="width:100%;max-height:280px;object-fit:cover;border-radius:8px;margin-bottom:24px;" alt="株式会社アイシーエル">
+  <h1><span class="gold">株式会社アイシーエル様へ、</span><br>AIでIT・ビジネススキル人材育成・企業研修の未来を変える提案があります。</h1>
+  <p>このページは、御社のためだけに作成しました。</p>
 
-    /* ========== HEADER BAR ========== */
-    .header-bar {
-      background: linear-gradient(90deg, #0a1628 0%, #1a2a4a 50%, #0a1628 100%);
-      border-bottom: 2px solid #c9a227;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .header-logo {
-      font-size: 13px;
-      color: #c9a227;
-      letter-spacing: 2px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    .header-tag {
-      background: #c9a227;
-      color: #0a1628;
-      font-size: 11px;
-      font-weight: bold;
-      padding: 4px 12px;
-      border-radius: 20px;
-      letter-spacing: 1px;
-    }
+  <h2>御社でAIを使うと、こう変わります</h2>
 
-    /* ========== HERO ========== */
-    .hero {
-      position: relative;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px 80px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #0a1628 0%, #0f2040 40%, #1a3460 70%, #0a1628 100%);
-      z-index: 0;
-    }
-    .hero-bg-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(201,162,39,0.12) 0%, transparent 70%);
-      z-index: 1;
-    }
-    .hero-photo-row {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 36px;
-      flex-wrap: wrap;
-    }
-    .hero-photo-wrap {
-      width: 200px;
-      height: 130px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 2px solid rgba(201,162,39,0.5);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-    }
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(201,162,39,0.15);
-      border: 1px solid rgba(201,162,39,0.6);
-      color: #c9a227;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      padding: 6px 20px;
-      border-radius: 30px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .hero-title {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1.3;
-      margin-bottom: 12px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
-    }
-    .hero-title span {
-      color: #c9a227;
-    }
-    .hero-subtitle {
-      font-size: clamp(14px, 2.5vw, 18px);
-      color: rgba(255,255,255,0.75);
-      max-width: 640px;
-      margin: 0 auto 32px;
-      line-height: 1.9;
-    }
-    .hero-cta-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #c9a227 0%, #e8c547 50%, #c9a227 100%);
-      color: #0a1628;
-      font-size: 16px;
-      font-weight: 900;
-      padding: 18px 48px;
-      border-radius: 50px;
-      letter-spacing: 1px;
-      box-shadow: 0 6px 30px rgba(201,162,39,0.5);
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    .hero-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(201,162,39,0.7);
-      text-decoration: none;
-    }
-    .hero-cta-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 12px;
-    }
+  <div class="card">
+    <div class="scenario-icon">📋</div>
+    <span class="tag">シナリオ 01 ／ 研修カリキュラム設計</span>
+    <p style="margin:0"><strong>受講者ニーズの分析からカリキュラム草案まで、AIが数時間を数分に短縮。</strong><br>これまで担当者が数日かけていた「受講者スキルレベルの分類」「研修目標の設定」「プログラム構成案の作成」をAIが自動生成。講師・コーディネーターが本来の付加価値業務に集中できる体制へ移行できます。</p>
+  </div>
 
-    /* ========== SECTION COMMON ========== */
-    .section {
-      padding: 80px 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .section-label {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-label .eyebrow {
-      display: inline-block;
-      color: #c9a227;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-label h2 {
-      font-size: clamp(22px, 4vw, 34px);
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1.4;
-    }
-    .section-label h2 span {
-      color: #c9a227;
-    }
-    .section-label p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.65);
-      margin-top: 12px;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(201,162,39,0.2);
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+  <div class="card">
+    <div class="scenario-icon">🎯</div>
+    <span class="tag">シナリオ 02 ／ 法人営業・提案資料</span>
+    <p style="margin:0"><strong>企業ごとの課題に合わせた提案書をAIで即時パーソナライズ。</strong><br>クライアント企業の業種・規模・課題をAIに入力するだけで、刺さる提案書の骨格を自動生成。営業担当が1社あたりにかける資料作成時間を最大70%削減し、より多くの企業への提案活動を実現します。</p>
+  </div>
 
-    /* ========== SCENARIO CARDS ========== */
-    .scenario-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .scenario-card {
-      background: linear-gradient(145deg, #0f2040 0%, #162850 100%);
-      border: 1px solid rgba(201,162,39,0.25);
-      border-radius: 16px;
-      padding: 32px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .scenario-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(201,162,39,0.6);
-    }
-    .scenario-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #c9a227, #e8c547);
-    }
-    .scenario-num {
-      font-size: 11px;
-      font-weight: bold;
-      color: #c9a227;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    .scenario-icon {
-      font-size: 36px;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .scenario-card h3 {
-      font-size: 18px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .scenario-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.9;
-    }
-    .scenario-result {
-      margin-top: 16px;
-      background: rgba(201,162,39,0.1);
-      border-left: 3px solid #c9a227;
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      font-size: 13px;
-      color: #c9a227;
-      font-weight: bold;
-    }
+  <div class="card">
+    <div class="scenario-icon">📊</div>
+    <span class="tag">シナリオ 03 ／ 研修効果レポーティング</span>
+    <p style="margin:0"><strong>受講後アンケート・行動変容データをAIが自動集計・分析・レポート化。</strong><br>研修の効果測定は「作業が多く後回し」になりがちな課題。AIを活用すれば、受講者の自由記述データから傾向を抽出し、次回カリキュラム改善への示唆まで含めたレポートを自動生成。クライアントへの報告品質が格段に向上します。</p>
+  </div>
 
-    /* ========== FEATURES ========== */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    .feature-card {
-      background: #0f2040;
-      border: 1px solid rgba(201,162,39,0.2);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-    }
-    .feature-icon-wrap {
-      width: 72px;
-      height: 72px;
-      background: linear-gradient(135deg, rgba(201,162,39,0.2), rgba(201,162,39,0.05));
-      border: 2px solid rgba(201,162,39,0.4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 30px;
-    }
-    .feature-card h3 {
-      font-size: 17px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.9;
-    }
-    .feature-badge {
-      display: inline-block;
-      margin-top: 14px;
-      background: rgba(201,162,39,0.15);
-      border: 1px solid rgba(201,162,39,0.4);
-      color: #c9a227;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 4px 14px;
-      border-radius: 20px;
-    }
+  <h2>Canal AI研修の特徴</h2>
 
-    /* ========== TRACK RECORD ========== */
-    .track-section {
-      background: linear-gradient(135deg, #0f1e38 0%, #162040 100%);
-      border-top: 1px solid rgba(201,162,39,0.15);
-      border-bottom: 1px solid rgba(201,162,39,0.15);
-      padding: 80px 24px;
-    }
-    .track-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .stat-box {
-      text-align: center;
-      padding: 32px 20px;
-      background: rgba(201,162,39,0.06);
-      border: 1px solid rgba(201,162,39,0.2);
-      border-radius: 16px;
-      position: relative;
-    }
-    .stat-num {
-      font-size: clamp(36px, 6vw, 56px);
-      font-weight: 900;
-      color: #c9a227;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-unit {
-      font-size: 18px;
-      color: #c9a227;
-    }
-    .stat-label {
-      font-size: 13px;
-      color: rgba(255,255,255,0.65);
-      margin-top: 8px;
-      line-height: 1.6;
-    }
-    .industry-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 36px;
-    }
-    .industry-tag {
-      background: rgba(201,162,39,0.1);
-      border: 1px solid rgba(201,162,39,0.3);
-      color: rgba(255,255,255,0.8);
-      font-size: 13px;
-      padding: 6px 16px;
-      border-radius: 20px;
-    }
+  <div class="card">
+    <span class="tag">特徴 01 ／ 研修会社だからこそ刺さる専門設計</span>
+    <p style="margin:0"><strong>IT・ビジネススキル研修の現場を熟知したカリキュラム。</strong><br>一般的なAIツール講座ではなく、「研修設計・営業提案・効果測定・受講者フォロー」という御社の業務フローに完全に沿った実践型プログラムです。座学ゼロ、初日から業務に使えるAI活用術を習得できます。</p>
+  </div>
 
-    /* ========== SUBSIDY ========== */
-    .subsidy
+  <div class="card">
+    <span class="tag">特徴 02 ／ 受講者レベルに合わせた完全カスタマイズ</span>
+    <p style="margin:0"><strong>AI初心者からITリテラシーの高い講師陣まで、全レベル対応。</strong><br>事前ヒアリングをもとに、受講者のデジタルスキルレベルに合わせてコンテンツを調整します。「社員全員をAI活用人材に育てたい」という御社のミッションに直結した段階別カリキュラムを提供します。</p>
+  </div>
+
+  <div class="card">
+    <span class="tag">特徴 03 ／ 研修後も使い続けられるフォローアップ体制</span>
+    <p style="margin:0"><strong>受講後30日間のSlack・メールサポートで現場定着率を最大化。</strong><br>「研修を受けたが結局使っていない」という失敗を防ぐため、業務での活用シーンに応じた個別フォローを実施。御社の講師・コーディネーターが自信を持ってAIを使い続けられる環境を構築します。</p>
+  </div>
+
+  <h2>助成金で実質 <span class="price">10万円</span>/人</h2>
+  <div class="card">
+    <p>厚生労働省「人材開発支援助成金」活用で、通常<strong>40万円/人</strong>の研修が<strong>実質約10万円/人</strong>（5名受講時）でご受講いただけます。</p>
+    <p style="margin:0">申請サポートも無料で対応。助成金の手続きが初めての企業様でも安心してスタートできます。<strong>まずはご相談いただくだけで、受給可否の無料診断も実施中です。</strong></p>
+  </div>
+
+  <h2>TeamEnergyグループ 32社・約400名の導入実績</h2>
+  <div class="card"><p>グループ各社での先行導入を経て、体系化されたカリキュラムを提供しています。</p></div>
+
+  <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A2%E3%82%A4%E3%82%B7%E3%83%BC%E3%82%A8%E3%83%AB様 AI研修のご相談" class="cta">まずは30分、話を聞いてみる →</a>
+  <footer>Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com</footer>
+</div>
+</body>
+</html>
