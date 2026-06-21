@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>税理士法人広瀬 | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#2563eb55,#ffffff,#2563eb33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><span style="font-size:18px;font-weight:900;color:#2563eb;">税理士法人広瀬</span></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">トップページ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">コンセプト</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">グループコンセプト</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">代表メッセージ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">よくある質問</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">税務・会計</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">相続・事業承継</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">M&A</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">地方公会計</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">DX・システム</a></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:#111;position:relative;">
+  <img src="data:image/png;base64,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" alt="税理士法人広瀬" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
+      90年超の解決力で、夢を共に。
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      税務・相続・M&A・社労士まで、京都から多角的にサポート
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#2563eb;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #2563eb66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">税理士法人広瀬について</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">多角化による提案型サービス</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">税務から補助金・保険まで、課題に合わせた提案を一括対応</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">CONCEPT グループコンセプト</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">長年培った解決力で、あなたの夢を共に叶えるパートナー</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">ヒロセのサービス</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">相続・事業承継・M&A・IT導入など幅広い専門サービスを提供</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 税理士法人広瀬</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#2563eb;">議事録自動化やRPA活用で、税務・労務の手作業時間を大幅に削減できます。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずはAIリニューアルデモを見てみる
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E7%A8%8E%E7%90%86%E5%A3%AB%E6%B3%95%E4%BA%BA%E5%BA%83%E7%80%AC様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#2563eb;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #2563eb55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 税理士法人広瀬 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
