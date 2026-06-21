@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>株式会社Tratto Brain | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#2563eb55,#ffffff,#2563eb33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><span style="font-size:18px;font-weight:900;color:#2563eb;">株式会社Tratto Brain</span></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:#111;position:relative;">
+  <img src="data:image/gif;base64,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" alt="株式会社Tratto Brain" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
+      成果につながる、京都のWeb制作
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      フルオーダーメイドで500社以上の実績。SEO・AI検索対応も一貫対応。
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#2563eb;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #2563eb66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">株式会社Tratto Brainについて</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">Webサイト制作・ホームページ制作・リニューアル</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">企画からデザイン・コーディングまで社内一貫で対応。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">WordPress制作・システム開発</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">運用まで見据えた開発を社内体制で一貫して提供。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">SEO対策・AI検索（LLMO）対策</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">検索・AI検索を意識した情報設計で長く成果を継続。</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 株式会社Tratto Brain</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#2563eb;">提案書作成・SEOコンテンツ生成・LLMO対策をAIで効率化し、制作・運用コストを削減。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずはAIデモをご覧ください
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BETratto%20Brain様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#2563eb;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #2563eb55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 株式会社Tratto Brain 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
