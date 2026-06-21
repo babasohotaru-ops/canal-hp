@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>株式会社エフカラー | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#cf2e2e55,#ffffff,#cf2e2e33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJf44Kk44Ok44O8XzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE3NC40Nm1tIiBoZWlnaHQ9IjU5LjI2bW0iIHZpZXdCb3g9IjAgMCA0OTQuNTIgMTY3Ljk3Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzZhMzkwNjt9LmNscy0ye2ZpbGw6I2YwODMwMDt9LmNscy0ze2ZpbGw6I2E5ZDA2Yjt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9Il/jgqTjg6Tjg7xfMS0yIj48Zz48Zz48Zz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODcuOTcsMTUyLjQ2Yy0uODEsMS4yMy0zLjE5LDQuODktOC44NCw0Ljg5LTUuOTksMC0xMS4xMy00LjUtMTEuMTMtMTMuMDlzNS4xNC0xMy4wOSwxMS4xMy0xMy4wOWM1LjMxLDAsNy44MiwzLjM2LDguODQsNC44OXYtMTIuOTJjMC0uODUsLjUxLTEuMzIsMS4zMi0xLjMyLC41OSwwLDEuMzIsLjM0LDEuMzIsMS4zMnYzMi45M2MwLC44MS0uNTUsMS4yNy0xLjMyLDEuMjctLjQ3LDAtMS4zMi0uMjEtMS4zMi0xLjI3di0zLjYxWm0tOC41NC0xOC45MWMtNC41OSwwLTguNzksMy4xOS04Ljc5LDEwLjcxczQuMzgsMTAuNzEsOC43OSwxMC43MSw4LjU4LTMuMSw4LjU4LTEwLjcxLTQuMTYtMTAuNzEtOC41OC0xMC43MVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMDMuMzEsMTQ1LjE1Yy4wOCwyLC40Miw5LjgyLDkuOTQsOS44MiwxLjgzLDAsMy42NS0uMjYsNS40LS44OSwuODUtLjMsLjkzLS4zNCwxLjE1LS4zNCwuNTUsMCwxLjE5LC40NywxLjE5LDEuMTlzLS41NSwxLjA2LS44NSwxLjE5Yy0xLjEsLjUxLTMuODcsMS4yMy02Ljk3LDEuMjMtMTAuMzIsMC0xMi40OS04LjAzLTEyLjQ5LTEyLjkyLDAtNy4yMiw0LjEyLTEzLjI2LDExLjE3LTEzLjI2LDcuNzgsMCwxMC42Niw3LjEsMTAuNjYsMTEuMzksMCwyLjU5LTEuNzQsMi41OS0zLjYxLDIuNTloLTE1LjU5Wm0xNS41OS0yLjM4Yy41NSwwLDEuMDYsMCwxLjA2LS42OCwwLTEuNy0xLjY2LTguNTQtOC4xNi04LjU0LTQuODQsMC04LjEyLDMuOTEtOC40Niw5LjIyaDE1LjU1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTIzMy43OSwxNTQuMjFjMS4xOSwuMzgsMi43NiwuNzcsNC42NywuNzcsLjk0LDAsNi45MywwLDYuOTMtNC44NCwwLTMuMjMtMi40Mi0zLjk5LTYuNzYtNS4zNS0zLjE0LS45OC02Ljc2LTIuMDgtNi43Ni02LjY3czMuODItNi45Myw4LjYzLTYuOTNjMi41NSwwLDQuMjEsLjY0LDQuODksLjg5LC40MywuMTcsMS4wMiwuNDIsMS4wMiwxLjIzLDAsLjc2LS42LDEuMTktMS4xNSwxLjE5LS4wOCwwLTEuMjctLjM4LTEuNDktLjQyLTEuNDktLjQzLTIuNTktLjUxLTMuMzEtLjUxLTMuMzYsMC01Ljk1LDEuNDQtNS45NSw0LjQyczEuODcsMy42MSw2LjU5LDUuMWMyLjgsLjg1LDYuOTcsMi4xNyw2Ljk3LDcuMDVzLTQuMzgsNy4yMi05LjY1LDcuMjJjLS44MSwwLTMuNjEtLjA0LTYuNTktMS4yNy0uNDMtLjE3LTEuMDYtLjQzLTEuMDYtMS4yMywwLS42OCwuNTEtMS4yMywxLjIzLTEuMjMsLjE3LDAsMS41NywuNTEsMS43OCwuNTlaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjYyLjIyLDEyNC44OWMwLDEuMTktLjkzLDIuMTItMi4xMiwyLjEycy0yLjE3LS45My0yLjEyLTIuMTJjMC0xLjE5LC45OC0yLjEyLDIuMTItMi4xMnMyLjEyLC45OCwyLjEyLDIuMTJabS0zLjQ4LDcuNjFjMC0xLjEsLjg5LTEuMzIsMS4zMi0xLjMyLC44MSwwLDEuNCwuNDcsMS40LDEuMzJ2MjMuNTRjMCwuOTgtLjc2LDEuMzItMS4zNiwxLjMyLS44NSwwLTEuMzYtLjQ3LTEuMzYtMS4zMnYtMjMuNTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjkzLjM3LDEzMS4xOGMxLjIzLDAsMS40OSwuODEsMS40OSwxLjIzLDAsLjgxLS41OSwxLjE5LTEuMzIsMS4yMy0xLjU3LC4wOS0yLjQ2LC42OC0zLjEsMS4xNSwuMzQsLjU1LDEuMzYsMi4wNCwxLjM2LDQuNzIsMCw2LjI5LTUuODIsNy44Mi05LjIyLDcuODItMS4yMywwLTEuOTEtLjE3LTIuMzgtLjI1LTIuOTcsMS4wNi00LjA0LDIuMzgtNC4wNCwzLjM2LDAsMS40LDEuODcsMS43OCwyLjI5LDEuODcsLjgxLC4xMywyLjIxLC4yNSw2LjkzLC41NSw2LjQyLC40Miw4LjYzLDMuNjEsOC42Myw3LjM5LDAsNy43My05LjUyLDcuNzMtMTEuMzQsNy43My03LjM1LDAtMTAuOTYtMy4wMi0xMC45Ni03LjQ4LDAtMi45MywxLjQ1LTUuMDEsNC4wNC02LjYzLS44NS0uNDItMi4yMS0xLjE1LTIuMjEtMy4xLDAtMS43LDEuMjctMy40LDMuNzQtNC43Mi00LjE2LTIuMjUtNC4xNi02LjE2LTQuMTYtNi44OCwwLTQuOTcsNC4yOS03Ljk5LDkuNDMtNy45OSwuNTEsMCwzLjYxLDAsNi4wOCwxLjc0LDIuMjEtMS43NCw0LjMzLTEuNzQsNC43Ni0xLjc0Wm0tMTIuMzYsMjMuNzVjLTYuNjcsMC02LjY3LDQuODktNi42Nyw1LjQsMCw1LjMxLDcuMTQsNS4zMSw4LjM3LDUuMzEsNi44OCwwLDguNjctMi45Myw4LjY3LTUuMTgsMC00LjI5LTMuMjctNS41Mi0xMC4zNy01LjUyWm0tNS4yMy0xNS41NWMwLDMuNjEsMy4xLDUuNTcsNi42Myw1LjU3LDMuNzgsMCw2Ljc2LTIuMTIsNi43Ni01Ljc0cy0yLjg5LTUuNjktNi41OS01LjY5Yy00LjIxLDAtNi44LDIuNTUtNi44LDUuODZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzIyLjUyLDE1Ni4wN2MwLDEuMDYtLjg1LDEuMjctMS4zMiwxLjI3LS43NywwLTEuMzItLjQ3LTEuMzItMS4yN3YtMTMuM2MwLTQuMTYsMC05LjIyLTYuMi05LjIyLTMuOTEsMC01Ljg2LDIuNDItNi41OSwzLjUzLTEuMTUsMS44Ny0xLjE1LDQuMTYtMS4xNSw1LjY5djEzLjNjMCwxLjA2LS44NSwxLjI3LTEuMzIsMS4yNy0uNzcsMC0xLjMyLS40Ny0xLjMyLTEuMjd2LTIzLjYyYzAtLjkzLC43Mi0xLjI4LDEuMzItMS4yOCwuODEsMCwxLjMyLC40NywxLjMyLDEuMjh2My4wMmMyLjkzLTQuMjksNi42Ny00LjI5LDcuOTktNC4yOSw0LjA4LDAsNi40NiwyLjA0LDcuNDQsMy44MiwxLjAyLDEuOTEsMS4xNSwzLjY1LDEuMTUsNy40OHYxMy42WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM1Ni43NCwxMzEuMThjNi44LDAsMTIuMTUsNS4xLDEyLjE1LDEzLjA5LC4wNCw4LjAzLTUuMzUsMTMuMDktMTIuMTUsMTMuMDlzLTEyLjExLTUuMDEtMTIuMTEtMTMuMDksNS40LTEzLjA5LDEyLjExLTEzLjA5Wm0wLDIzLjhjNC40MiwwLDkuNDctMi45OCw5LjQ3LTEwLjcxcy01LjE0LTEwLjcxLTkuNDctMTAuNzEtOS40MywyLjkzLTkuNDMsMTAuNzEsNS4wNiwxMC43MSw5LjQzLDEwLjcxWiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM4MS4zOSwxMjguNDFjMC0yLjEyLDAtNi41OSw1LjgyLTYuNTksLjU5LDAsMS43OCwwLDEuNzgsMS4yMywwLC40Ny0uMywxLjE5LTEuMjMsMS4xOS0zLjYxLDAtMy43NCwxLjctMy43NCw0LjIxdjMuNGgzLjk1Yy45OCwwLDEuMTksLjgxLDEuMTksMS4xOSwwLC43Mi0uNDMsMS4xOS0xLjE5LDEuMTloLTMuOTV2MjEuODRjMCwxLjA2LS44NSwxLjI3LTEuMjcsMS4yNy0uODEsMC0xLjM2LS40Ny0xLjM2LTEuMjd2LTIxLjg0aC0zLjU3Yy0xLjE1LDAtMS4xOS0xLjA2LTEuMTktMS4xOSwwLS42OCwuNDMtMS4xOSwxLjE5LTEuMTloMy41N3YtMy40NFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MDIuMDQsMTI4LjQxYzAtMi4xMiwwLTYuNTksNS44Mi02LjU5LC41OSwwLDEuNzgsMCwxLjc4LDEuMjMsMCwuNDctLjMsMS4xOS0xLjIzLDEuMTktMy42MSwwLTMuNzQsMS43LTMuNzQsNC4yMXYzLjRoMy45NWMuOTgsMCwxLjE5LC44MSwxLjE5LDEuMTksMCwuNzItLjQzLDEuMTktMS4xOSwxLjE5aC0zLjk1djIxLjg0YzAsMS4wNi0uODUsMS4yNy0xLjI3LDEuMjctLjgxLDAtMS4zNi0uNDctMS4zNi0xLjI3di0yMS44NGgtMy41N2MtMS4xNSwwLTEuMTktMS4wNi0xLjE5LTEuMTksMC0uNjgsLjQyLTEuMTksMS4xOS0xLjE5aDMuNTd2LTMuNDRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDIzLjI5LDEyNC44OWMwLDEuMTktLjkzLDIuMTItMi4xMiwyLjEycy0yLjE3LS45My0yLjEyLTIuMTJjMC0xLjE5LC45OC0yLjEyLDIuMTItMi4xMnMyLjEyLC45OCwyLjEyLDIuMTJabS0zLjQ4LDcuNjFjMC0xLjEsLjg5LTEuMzIsMS4zMi0xLjMyLC44MSwwLDEuNCwuNDcsMS40LDEuMzJ2MjMuNTRjMCwuOTgtLjc2LDEuMzItMS4zNiwxLjMyLS44NSwwLTEuMzYtLjQ3LTEuMzYtMS4zMnYtMjMuNTRaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDMzLjE1LDE0NC4yNmMwLTcuMjcsNC43Ni0xMy4wOSwxMi41NC0xMy4wOSwyLjg5LDAsNS4zMSwuODksNi4zNywxLjQ5LC4zNCwuMjEsLjgxLC40NywuODEsMS4xNXMtLjUxLDEuMjMtMS4xOSwxLjIzYy0uMjEsMC0uMzgtLjA5LTEuMzItLjUxLS45My0uNDctMi41NS0uOTgtNC41OS0uOTgtNS40NCwwLTkuOTQsMy42NS05Ljk0LDEwLjY2LDAsNS45OSwzLjIzLDEwLjc1LDEwLjE2LDEwLjc1LDIuNjMsMCw0LjI1LS42LDQuOTctLjg5LC4zNC0uMTMsLjgxLS4zNCwxLjE1LS4zNCwuNTUsMCwxLjE1LC40NywxLjE1LDEuMTksMCwuMjEtLjA0LC44MS0uNzIsMS4xNS0xLjQsLjY4LTQuMjEsMS4yNy02Ljc2LDEuMjctOC42NywwLTEyLjYyLTYuNDItMTIuNjItMTMuMDlaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDYzLjk2LDE0NS4xNWMuMDgsMiwuNDIsOS44Miw5Ljk0LDkuODIsMS44MywwLDMuNjUtLjI2LDUuNC0uODksLjg1LS4zLC45My0uMzQsMS4xNS0uMzQsLjU1LDAsMS4xOSwuNDcsMS4xOSwxLjE5cy0uNTUsMS4wNi0uODUsMS4xOWMtMS4xLC41MS0zLjg3LDEuMjMtNi45NywxLjIzLTEwLjMyLDAtMTIuNDktOC4wMy0xMi40OS0xMi45MiwwLTcuMjIsNC4xMi0xMy4yNiwxMS4xOC0xMy4yNiw3Ljc3LDAsMTAuNjYsNy4xLDEwLjY2LDExLjM5LDAsMi41OS0xLjc0LDIuNTktMy42MSwyLjU5aC0xNS41OVptMTUuNTktMi4zOGMuNTUsMCwxLjA2LDAsMS4wNi0uNjgsMC0xLjctMS42Ni04LjU0LTguMTYtOC41NC00Ljg0LDAtOC4xMSwzLjkxLTguNDYsOS4yMmgxNS41NVoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00OTQuNTIsMTU0LjY3YzAsMS40OS0xLjE5LDIuNjgtMi42OCwyLjY4cy0yLjY4LTEuMTktMi42OC0yLjY4LDEuMTktMi43MiwyLjY4LTIuNzIsMi42OCwxLjE5LDIuNjgsMi43MloiLz48L2c+PGc+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTk1Ljk0LDQxLjloLTkuNDl2LTguMTZjMC02LjAyLC4zMS0xMC4xLDguOTgtMTAuMSwyLjI0LDAsMi45Ni0xLjczLDIuOTYtMi44NiwwLTIuOTYtMi44Ni0yLjk2LTQuMjgtMi45Ni0xMy45NywwLTEzLjk3LDEwLjcxLTEzLjk3LDE1LjgxdjguMjZoLTguNTdjLTEuODQsMC0yLjg2LDEuMjItMi44NiwyLjg2LDAsLjMxLC4xLDIuODYsMi44NiwyLjg2aDguNTd2NTIuNDNjMCwxLjk0LDEuMzMsMy4wNiwzLjI2LDMuMDYsMS4wMiwwLDMuMDYtLjUxLDMuMDYtMy4wNlY0Ny42MWg5LjQ5YzEuODQsMCwyLjg2LTEuMTIsMi44Ni0yLjg2LDAtLjkyLS41MS0yLjg2LTIuODYtMi44NloiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yODYuNjEsOTQuNDNjLS44MiwwLTEuOTQsLjUxLTIuNzUsLjgyLTEuNzMsLjcxLTUuNjEsMi4xNC0xMS45MywyLjE0LTE2LjYzLDAtMjQuMzgtMTEuNDItMjQuMzgtMjUuOCwwLTE2LjgzLDEwLjgxLTI1LjYsMjMuODctMjUuNiw0LjksMCw4Ljc3LDEuMjIsMTEuMDIsMi4zNSwyLjI0LDEuMDIsMi42NSwxLjIyLDMuMTYsMS4yMiwxLjYzLDAsMi44Ni0xLjMzLDIuODYtMi45NnMtMS4xMi0yLjI0LTEuOTQtMi43NWMtMi41NS0xLjQzLTguMzYtMy41Ny0xNS4zLTMuNTctMTguNjcsMC0zMC4wOSwxMy45Ny0zMC4wOSwzMS40MSwwLDE2LjAxLDkuNDksMzEuNDIsMzAuMjksMzEuNDIsNi4xMiwwLDEyLjg1LTEuNDMsMTYuMjItMy4wNiwxLjYzLS44MiwxLjczLTIuMjQsMS43My0yLjc1LDAtMS43My0xLjQzLTIuODYtMi43NS0yLjg2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMyNy42Miw0MC4yN2MtMTYuMTIsMC0yOS4wNywxMi4xNC0yOS4wNywzMS40MXMxMi45NSwzMS40MiwyOS4wNywzMS40MiwyOS4yNy0xMi4xNCwyOS4xNy0zMS40MmMwLTE5LjE3LTEyLjg1LTMxLjQxLTI5LjE3LTMxLjQxWm0wLDU3LjEyYy0xMC41MSwwLTIyLjY0LTcuMTQtMjIuNjQtMjUuN3MxMi4yNC0yNS43LDIyLjY0LTI1LjcsMjIuNzUsNy4wNCwyMi43NSwyNS43LTEyLjE0LDI1LjctMjIuNzUsMjUuN1oiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zODYuMjYsOTUuNzVoLTIuMTRjLTUuNTEsMC01LjUxLTMuMTYtNS41MS03LjA0VjIwLjk5YzAtMi4wNC0xLjMyLTMuMTYtMy4yNi0zLjE2LTEuMTIsMC0zLjE2LC41MS0zLjE2LDMuMTZWODkuMDJjMCw2LjEyLC40MSwxMi40NCwxMS43MywxMi40NGgyLjM1YzEuNzMsMCwyLjc1LTEuMTIsMi43NS0yLjg2LDAtMS4wMi0uNTEtMi44Ni0yLjc1LTIuODZaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDI0LjQxLDQwLjI3Yy0xNi4xMiwwLTI5LjA3LDEyLjE0LTI5LjA3LDMxLjQxczEyLjk1LDMxLjQyLDI5LjA3LDMxLjQyLDI5LjI3LTEyLjE0LDI5LjE3LTMxLjQyYzAtMTkuMTctMTIuODUtMzEuNDEtMjkuMTctMzEuNDFabTAsNTcuMTJjLTEwLjUxLDAtMjIuNjQtNy4xNC0yMi42NC0yNS43czEyLjI0LTI1LjcsMjIuNjQtMjUuNywyMi43NCw3LjA0LDIyLjc0LDI1LjctMTIuMTQsMjUuNy0yMi43NCwyNS43WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQ5MS41Myw0MC4yN2MtNS40MSwwLTEzLjA2LDIuMzUtMTcuNjUsMTAuM3YtNy4yNGMwLTIuNTUtMi4wNC0zLjA2LTMuMTYtMy4wNi0xLjg0LDAtMy4xNiwxLjEyLTMuMTYsMy4wNnY1Ni43MWMwLDIuMjQsMS43MywzLjA2LDMuMTYsMy4wNiwxLjk0LDAsMy4xNi0xLjEyLDMuMTYtMy4wNnYtMzEuOTJjMC01LDAtMTcuODUsMTIuODUtMjEuNDIsMS41My0uNDEsMS42My0uNDEsNS4yLS43MSwuNjEtLjEsMi41NS0uNTEsMi41NS0yLjg2LDAtMS41My0xLjAyLTIuODYtMi45Ni0yLjg2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTI3My4xNSwzNi40MWMuMzItMTIuNTMtMTMuNjEtMTUtMjIuMzUtMTMuNjYsNS44Myw0LjA1LDguMDcsMjAuNDQsMjIuMzUsMTMuNjZaIi8+PC9nPjwvZz48Zz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMTMuMjYsMTQwLjY0Yy0yMy42OSwyMy42OS02Mi4yNCwyMy42OS04NS45MywwLTExLjQ4LTExLjQ4LTE3LjgtMjYuNzQtMTcuOC00Mi45N3M2LjMyLTMxLjQ5LDE3LjgtNDIuOTdjMjMuNy0yMy42OSw2Mi4yNC0yMy42OSw4NS45MywwLDEuODYsMS44Niw0LjksMS44Niw2Ljc2LDAsLjktLjksMS40LTIuMSwxLjQtMy4zOHMtLjUtMi40OC0xLjQtMy4zOGMtMTMuMjYtMTMuMjYtMzAuOTItMjAuNTctNDkuNzMtMjAuNTdoMGMtMTguODEsMC0zNi40Nyw3LjMtNDkuNzMsMjAuNTdDNy4zLDYxLjIxLDAsNzguODcsMCw5Ny42OHM3LjMsMzYuNDcsMjAuNTcsNDkuNzNjMTMuMjYsMTMuMjYsMzAuOTIsMjAuNTcsNDkuNzMsMjAuNTdzMzYuNDctNy4zLDQ5LjczLTIwLjU3Yy45LS45LDEuNC0yLjEsMS40LTMuMzhzLS41LTIuNDgtMS40LTMuMzhjLTEuODYtMS44Ni00LjktMS44Ni02Ljc2LDBaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNOTEuODMsMTQuNTVjMS44LDAsMy4yNS0xLjQ2LDMuMjUtMy4yNXMtMS40Ni0zLjI1LTMuMjUtMy4yNWMtMTMuNjcsMC0yNC43OSwxMS4xMi0yNC43OSwyNC43OXYyMi44MWMtNC45NC0uNjktOS41LTIuOTEtMTMuMDYtNi40Ny0xLjI3LTEuMjctMy4zMy0xLjI3LTQuNiwwLTEuMjcsMS4yNy0xLjI3LDMuMzMsMCw0LjYsNC43OSw0LjgsMTAuOTgsNy43MiwxNy42Niw4LjQ0djI5Ljc2YzAsMS44LDEuNDYsMy4yNSwzLjI1LDMuMjVzMy4yNS0xLjQ2LDMuMjUtMy4yNXYtMjkuNzZjNi42OS0uNzIsMTIuODctMy42NSwxNy42Ni04LjQ0LDEuMjctMS4yNywxLjI3LTMuMzMsMC00LjYtMS4yNy0xLjI3LTMuMzMtMS4yNy00LjYsMC0zLjU3LDMuNTYtOC4xMiw1Ljc5LTEzLjA2LDYuNDd2LTIyLjgxYzAtMTAuMDgsOC4yLTE4LjI5LDE4LjI5LTE4LjI5WiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTMzLjM3LC40N2M4LjQ4LDUuOSwxMS43NCwyOS43NSwzMi41MiwxOS44OEM2Ni4zNSwyLjEyLDQ2LjA5LTEuNDcsMzMuMzcsLjQ3WiIvPjwvZz48L2c+PC9nPjwvc3ZnPg==" alt="株式会社エフカラー" style="height:40px;max-width:160px;object-fit:contain;"></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">About エフカラーについて</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">About エフカラーについて</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Company 会社概要</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Greeting 代表挨拶</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Access アクセス</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Staff スタッフ紹介</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Works 制作実績</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Works 制作実績</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Voice お客様の声</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Service サービス一覧</a></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:linear-gradient(145deg,#ffffff 0%,#cf2e2e22 60%,#ffffff 100%);">
+  
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#1a1a1a;
+         ">
+      やさしさと、AIの力で。
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      女性クリエイターだけの制作会社。SEO・AIO・AI活用まで一貫対応。
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#cf2e2e;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #cf2e2e66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">株式会社エフカラーについて</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">About エフカラーについて</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">リピート率95%。中小企業に寄り添う伴走型Web制作会社。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">Works 制作実績</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">ブランディングからリクルートLPまで幅広い制作実績を公開中。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">Greeting 代表挨拶</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">AIの疑問・不安を持つ経営者様へ、代表が直接お答えします。</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 株式会社エフカラー</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">サイト制作×AI活用支援で、アクセス2〜10倍を実現した伴走型コンサル。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずは無料相談・AIデモを見てみる
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A8%E3%83%95%E3%82%AB%E3%83%A9%E3%83%BC様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#cf2e2e;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #cf2e2e55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 株式会社エフカラー 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
