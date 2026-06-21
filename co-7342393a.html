@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>京都社会保険労務士法人 | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#2563eb55,#ffffff,#2563eb33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><span style="font-size:18px;font-weight:900;color:#2563eb;">京都社会保険労務士法人</span></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">お問い合わせ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">私たちについて</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">労務顧問</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">アウトソーシング</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">採用コンサル</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">助成金</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">お客様の声</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">お知らせ・最新セミナー情報</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">採用情報</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#333333'">アクセス</a></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:#111;position:relative;">
+  <img src="data:image/jpeg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMvaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0NSA3OS4xNjM0OTksIDIwMTgvMDgvMTMtMTY6NDA6MjIgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozQjk0NTNGQzI2RTYxMUVBQjhFRkE3M0YwOUZCM0Y5NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozQjk0NTNGRDI2RTYxMUVBQjhFRkE3M0YwOUZCM0Y5NiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjNCOTQ1M0ZBMjZFNjExRUFCOEVGQTczRjA5RkIzRjk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjNCOTQ1M0ZCMjZFNjExRUFCOEVGQTczRjA5RkIzRjk2Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgBGAGGAwERAAIRAQMRAf/EAKEAAQAABwEBAAAAAAAAAAAAAAABAgMEBQYHCAkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBRAAAQMCBAMFBQUFBQYHAAAAAQACAxEEITESBUETBlFhcSIHgZEyUhShsUJiI8HR4XIIgpIzQxXwosJTYyTxstJzgyUWEQEBAAIBBAIBBAIBBQAAAAAAARECAyExEgRBURNhgSIycZHRocFCIxT/2gAMAwEAAhEDEQA/APVKAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgpXZcLWUtJa4NJDhgRgs79qs7sbaTzuYC6Rx8SV49N79utkXPMk+Y+9b8r9piIcyT5j708r9mIc2X5z7ynlfsxDmy/OfenlfsxEObL8595Tyv2YhzZfnPvKeV+zEObL8595U8r9mIc2X53e8p5X7MQ5svzu95Tyv2YObL87veU8r9mIc2X53e8p5X7MRDmy/O73lPK/ZiHNl+d3vKeV+zEObL87veU8r9mIjzZfnd7ynlfswhzZfnd7ynlfswc2X53e8p5X7MQ5svzu95Tyv2YhzZfnd7ynlfsxDmy/O73lPK/a4iHNl+d3vKeV+zEOdL87veU8r9mIl503zu95U879mIyi9riICAgICAgICAgICAgICAgICAgICAgICCncCtvKM6sdh7FNuyzuxFl8AXg0dqu10QKCCAggoCAgKAgI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" alt="京都社会保険労務士法人" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
+      京都の人事労務、30年のプロへ
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      就業規則・社会保険・給与計算を専属チームが一括サポート
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#2563eb;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #2563eb66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">京都社会保険労務士法人について</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">京都で30年以上の歴史</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">多くの企業様の実績をもとに、確かなサポートを提供します。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">専属チーム体制での業務対応</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">各業務の専門チームが、一つひとつの案件に丁寧に対応します。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">クラウド化へのサポート</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">信頼のシステム導入から運用まで、労務のデジタル化を支援します。</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 京都社会保険労務士法人</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#2563eb;">給与計算・社会保険手続のAI活用で、担当者の反復業務を削減し顧問先対応に集中できます。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずは無料デモを体験する
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E4%BA%AC%E9%83%BD%E7%A4%BE%E4%BC%9A%E4%BF%9D%E9%99%BA%E5%8A%B4%E5%8B%99%E5%A3%AB%E6%B3%95%E4%BA%BA様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#2563eb;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #2563eb55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 京都社会保険労務士法人 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
