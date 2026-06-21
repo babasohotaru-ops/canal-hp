@@ -3,103 +3,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>株式会社アイワ工業 | AIリニューアルサンプル</title>
-</head>
-<body style="margin:0;background:#D41717;color:#e8e8e8;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;">
+<title>株式会社アイワ工業 | AIリニューアルサンプル by Canal AI</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#D41717;color:#e8e8e8;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
 
-<!-- HEADER -->
-<header style="background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.1);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
+  /* ── アニメーション定義 ── */
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+  @keyframes slideInLeft{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes countUp{from{opacity:0}to{opacity:1}}
+
+  .hero-badge{animation:fadeInDown .7s ease both}
+  .hero-h1{animation:fadeInUp .8s .2s ease both}
+  .hero-sub{animation:fadeInUp .8s .4s ease both}
+  .hero-cta{animation:fadeInUp .8s .6s ease both}
+
+  /* スクロールアニメーション（JSで付与） */
+  .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  /* カードホバー */
+  .card:hover{transform:translateY(-6px)!important;box-shadow:0 20px 40px rgba(0,0,0,.4)!important}
+
+  /* CTA グラデーションアニメーション */
+  .cta-section{
+    background:linear-gradient(270deg,#D4171744,#D41717,#D4171722,#D41717);
+    background-size:400% 400%;
+    animation:gradientShift 8s ease infinite;
+  }
+
+  /* カウントアップ */
+  .count-num{display:inline-block;animation:countUp .5s ease both}
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header style="background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.1);
+     padding:16px 40px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;">
   <div><img src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="株式会社アイワ工業" style="height:44px;max-width:180px;object-fit:contain;"></div>
-  <nav style="display:flex;gap:24px;font-size:13px;color:rgba(255,255,255,0.7);">
-    <span>掃除大賞</span><span>ホーム</span><span>どんな会社なの？</span><span>工場配管の専門家</span><span>配管トラブルの緊急対応</span>
-  </nav>
+  <nav style="display:flex;gap:28px;"><span style="font-size:13px;color:rgba(255,255,255,0.75);cursor:pointer;">掃除大賞</span><span style="font-size:13px;color:rgba(255,255,255,0.75);cursor:pointer;">ホーム</span><span style="font-size:13px;color:rgba(255,255,255,0.75);cursor:pointer;">どんな会社なの？</span><span style="font-size:13px;color:rgba(255,255,255,0.75);cursor:pointer;">工場配管の専門家</span><span style="font-size:13px;color:rgba(255,255,255,0.75);cursor:pointer;">配管トラブルの緊急対応</span></nav>
 </header>
 
-<!-- HERO -->
-<section style="padding:100px 32px 80px;text-align:center;background:linear-gradient(135deg,#D41717 0%,#D4171722 50%,#D41717 100%);">
-  <div style="display:inline-block;background:#D41717;color:#fff;font-size:11px;font-weight:800;padding:4px 16px;border-radius:20px;letter-spacing:2px;margin-bottom:24px;text-transform:uppercase;">
-    AI POWERED RENEWAL SAMPLE
+<!-- ヒーロー -->
+<section style="min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;position:relative;background:linear-gradient(135deg,#D41717 0%,#D4171733 50%,#D41717 100%);">
+  <div style="position:relative;z-index:1;max-width:720px;">
+    <div class="hero-badge" style="display:inline-block;background:#D41717;color:#ffffff;
+         font-size:11px;font-weight:800;padding:6px 20px;border-radius:20px;
+         letter-spacing:2px;margin-bottom:28px;text-transform:uppercase;">
+      ✨ AI POWERED RENEWAL SAMPLE
+    </div>
+    <h1 class="hero-h1" style="font-size:clamp(32px,7vw,64px);font-weight:900;
+         line-height:1.15;margin-bottom:24px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,.5);">
+      配管の頂点、ここにあり。
+    </h1>
+    <p class="hero-sub" style="font-size:clamp(15px,2.5vw,20px);color:rgba(255,255,255,0.85);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      文部科学大臣賞受賞。半田・豊田の工場配管はアイワ工業にお任せください。
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A2%E3%82%A4%E3%83%AF%E5%B7%A5%E6%A5%AD様 AI研修のご相談" style="display:inline-block;background:#D41717;color:#ffffff;
+           font-size:17px;font-weight:900;padding:18px 48px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #D4171766;
+           transition:transform .2s,box-shadow .2s;">
+        お問い合わせ →
+      </a>
+    </div>
   </div>
-  <h1 style="font-size:clamp(28px,6vw,52px);font-weight:900;margin:0 0 20px;line-height:1.2;">
-    配管のプロが、街を動かす。
-  </h1>
-  <p style="font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 40px;">
-    文部科学大臣賞受賞の技術力で、工場の血管を守り続ける専門集団。
-  </p>
-  <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A2%E3%82%A4%E3%83%AF%E5%B7%A5%E6%A5%AD様 AI研修のご相談" style="display:inline-block;background:#D41717;color:#fff;font-size:16px;font-weight:800;padding:16px 40px;border-radius:50px;text-decoration:none;">
-    お問い合わせ →
-  </a>
 </section>
 
-<!-- SERVICES -->
-<section style="padding:80px 32px;max-width:960px;margin:0 auto;">
-  <h2 style="text-align:center;font-size:28px;font-weight:900;margin-bottom:12px;">事業・サービス</h2>
-  <p style="text-align:center;color:rgba(255,255,255,0.5);margin-bottom:40px;font-size:14px;">Our Services</p>
-  <div style="display:flex;flex-wrap:wrap;gap:20px;">
+<!-- 事業・サービス -->
+<section style="padding:100px 40px;max-width:1000px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:56px;">
+    <div style="font-size:12px;color:#D41717;font-weight:800;letter-spacing:3px;margin-bottom:12px;">OUR SERVICES</div>
+    <h2 style="font-size:clamp(24px,4vw,38px);font-weight:900;">事業・サービス</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
     
-        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-             border-radius:12px;padding:24px;flex:1;min-width:200px;">
-          <div style="font-size:18px;font-weight:800;color:#D41717;margin-bottom:8px;">工場配管の専門家</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.7;">製造ラインを止めない高精度な配管設計・施工を半田・豊田エリアで展開。</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-             border-radius:12px;padding:24px;flex:1;min-width:200px;">
-          <div style="font-size:18px;font-weight:800;color:#D41717;margin-bottom:8px;">配管トラブルの緊急対応</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.7;">突然の漏水・詰まりも迅速対応。工場の稼働を最優先に即日駆けつけます。</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
-             border-radius:12px;padding:24px;flex:1;min-width:200px;">
-          <div style="font-size:18px;font-weight:800;color:#D41717;margin-bottom:8px;">技術力</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.7;">文部科学大臣賞が証明する確かな施工品質。熟練職人が丁寧に仕上げます。</div>
-        </div>
+      <div class="card fade-up" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+           border-radius:16px;padding:28px 24px;flex:1;min-width:220px;transition:transform .3s,box-shadow .3s;">
+        <div style="font-size:36px;margin-bottom:12px;">🏭</div>
+        <div style="font-size:17px;font-weight:800;color:#D41717;margin-bottom:8px;">工場配管の専門施工</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">複雑な工場配管も豊富な実績で確実に対応</div>
+      </div>
+      <div class="card fade-up" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+           border-radius:16px;padding:28px 24px;flex:1;min-width:220px;transition:transform .3s,box-shadow .3s;">
+        <div style="font-size:36px;margin-bottom:12px;">🚨</div>
+        <div style="font-size:17px;font-weight:800;color:#D41717;margin-bottom:8px;">配管トラブル緊急対応</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">半田・豊田エリアへ迅速に駆けつけます</div>
+      </div>
+      <div class="card fade-up" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);
+           border-radius:16px;padding:28px 24px;flex:1;min-width:220px;transition:transform .3s,box-shadow .3s;">
+        <div style="font-size:36px;margin-bottom:12px;">🏆</div>
+        <div style="font-size:17px;font-weight:800;color:#D41717;margin-bottom:8px;">受賞実績の確かな技術力</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;">文部科学大臣賞が証明する圧倒的な技術</div>
+      </div>
   </div>
 </section>
 
-<!-- AI SCENARIOS -->
-<section style="padding:80px 32px;background:rgba(255,255,255,0.03);border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);">
-  <div style="max-width:720px;margin:0 auto;">
-    <h2 style="font-size:26px;font-weight:900;margin-bottom:8px;">AIを導入すると、こう変わります</h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:32px;">株式会社アイワ工業での活用イメージ</p>
+<!-- AI活用シナリオ -->
+<section style="padding:100px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:48px;">
+      <div style="font-size:12px;color:#D41717;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 株式会社アイワ工業</div>
+      <h2 style="font-size:clamp(22px,4vw,34px);font-weight:900;margin-bottom:8px;">AIを導入すると、こう変わります</h2>
+      <p style="color:rgba(255,255,255,0.5);font-size:15px;">御社の業務に即したAI活用イメージです</p>
+    </div>
     
-        <div style="background:rgba(255,255,255,0.04);border-left:4px solid #D41717;
-             padding:20px 24px;border-radius:0 12px 12px 0;margin-bottom:16px;">
-          <div style="font-size:16px;font-weight:800;color:#D41717;margin-bottom:6px;">⚡ AI見積もりで即レス営業</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.7;">現場写真をAIに読み込ませるだけで概算見積もりが自動生成。商談スピードが劇的に上がります。</div>
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);border-left:4px solid #D41717;
+           padding:24px 28px;border-radius:0 16px 16px 0;margin-bottom:20px;">
+        <div style="font-size:16px;font-weight:800;color:#D41717;margin-bottom:6px;">⚡ 配管点検レポートのAI自動生成</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:8px;">現場写真をアップするだけでAIが点検報告書を自動作成。手書き・転記作業を一掃できます。</div>
+        <div style="display:inline-block;background:#D4171722;border:1px solid #D4171766;
+             color:#D41717;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">
+          📈 報告書作成工数70%削減
         </div>
-        <div style="background:rgba(255,255,255,0.04);border-left:4px solid #D41717;
-             padding:20px 24px;border-radius:0 12px 12px 0;margin-bottom:16px;">
-          <div style="font-size:16px;font-weight:800;color:#D41717;margin-bottom:6px;">⚡ AIで施工履歴を資産化</div>
-          <div style="font-size:14px;color:rgba(255,255,255,0.8);line-height:1.7;">過去の工場配管データをAIで整理・検索可能に。次の提案精度と受注率を同時に高めます。</div>
+      </div>
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);border-left:4px solid #D41717;
+           padding:24px 28px;border-radius:0 16px 16px 0;margin-bottom:20px;">
+        <div style="font-size:16px;font-weight:800;color:#D41717;margin-bottom:6px;">⚡ 緊急対応の問い合わせAIチャット対応</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.8;margin-bottom:8px;">24時間AIチャットが一次受付し、トラブル内容・場所を自動ヒアリングして担当者に即通知。</div>
+        <div style="display:inline-block;background:#D4171722;border:1px solid #D4171766;
+             color:#D41717;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;">
+          📈 初動対応時間50%短縮
         </div>
+      </div>
   </div>
 </section>
 
-<!-- CANAL AI CTA -->
-<section style="padding:80px 32px;text-align:center;background:linear-gradient(135deg,#D4171733 0%,#D4171711 100%);">
-  <div style="max-width:600px;margin:0 auto;">
-    <div style="font-size:12px;color:#D41717;font-weight:800;letter-spacing:2px;margin-bottom:16px;">✨ POWERED BY CANAL AI</div>
-    <h2 style="font-size:clamp(22px,4vw,34px);font-weight:900;margin-bottom:16px;line-height:1.3;">
+<!-- 数字で見る実績 -->
+<section style="padding:80px 40px;">
+  <div style="max-width:800px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px;justify-content:center;">
+    <div class="fade-up" style="text-align:center;flex:1;min-width:180px;">
+      <div style="font-size:52px;font-weight:900;color:#D41717;" class="count-target" data-target="32">0</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px;">グループ導入企業数</div>
+    </div>
+    <div class="fade-up" style="text-align:center;flex:1;min-width:180px;">
+      <div style="font-size:52px;font-weight:900;color:#D41717;" class="count-target" data-target="400">0</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px;">研修受講者数（名）</div>
+    </div>
+    <div class="fade-up" style="text-align:center;flex:1;min-width:180px;">
+      <div style="font-size:52px;font-weight:900;color:#D41717;">10<span style="font-size:24px;">万</span></div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px;">助成金活用後の実質費用/人</div>
+    </div>
+  </div>
+</section>
+
+<!-- Canal AI CTA -->
+<section class="cta-section" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="fade-up" style="font-size:13px;color:#D41717;font-weight:800;letter-spacing:2px;margin-bottom:20px;">
+      ✨ CANAL AI × 株式会社アイワ工業
+    </div>
+    <h2 class="fade-up" style="font-size:clamp(24px,5vw,42px);font-weight:900;margin-bottom:20px;line-height:1.3;">
       このページは、AIが数分で作成しました。
     </h2>
-    <p style="color:rgba(255,255,255,0.7);font-size:16px;margin-bottom:8px;">
-      配管業の未来、Canal AIと一緒に描きませんか？
+    <p class="fade-up" style="font-size:17px;color:rgba(255,255,255,0.8);margin-bottom:12px;">
+      配管のプロの仕事をAIでもっと加速させませんか？
     </p>
-    <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:40px;">
-      助成金活用で実質 <strong style="color:#D41717;font-size:20px;">10万円/人</strong>（通常40万円）
+    <p class="fade-up" style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:48px;">
+      助成金で通常<s>40万円</s>→ 実質 <strong style="color:#D41717;font-size:22px;">10万円</strong>/人（5名受講時）
     </p>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A2%E3%82%A4%E3%83%AF%E5%B7%A5%E6%A5%AD様 AI研修のご相談" style="display:inline-block;background:#D41717;color:#fff;font-size:18px;font-weight:900;padding:20px 52px;border-radius:50px;text-decoration:none;letter-spacing:0.5px;">
+    <a class="fade-up" href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A2%E3%82%A4%E3%83%AF%E5%B7%A5%E6%A5%AD様 AI研修のご相談" style="display:inline-block;background:#D41717;color:#ffffff;
+         font-size:18px;font-weight:900;padding:22px 60px;border-radius:50px;
+         text-decoration:none;box-shadow:0 8px 40px #D4171755;letter-spacing:.5px;">
       AI研修について相談する（無料）
     </a>
-    <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.4);">
-      30分のオンライン相談から。押しつけ販売は一切しません。
+    <p style="margin-top:20px;font-size:13px;color:rgba(255,255,255,0.35);">
+      30分のオンライン相談から。強引な営業は一切しません。
     </p>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer style="padding:32px;text-align:center;font-size:12px;color:rgba(255,255,255,0.3);border-top:1px solid rgba(255,255,255,0.08);">
-  © 株式会社アイワ工業 ｜ Canal AI研修 by Hotaru&amp;Co
+<!-- フッター -->
+<footer style="padding:40px;text-align:center;font-size:12px;color:rgba(255,255,255,0.3);
+     border-top:1px solid rgba(255,255,255,0.07);">
+  © 株式会社アイワ工業 ｜ AIサンプルページ by Canal AI / Hotaru&amp;Co
 </footer>
 
+<script>
+// ── Intersection Observer（スクロールアニメーション）──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.15, rootMargin: '0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── カウントアップ ──
+const countEls = document.querySelectorAll('.count-target');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    const duration = 1200;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = Math.floor(current).toLocaleString();
+      if (current >= target) clearInterval(timer);
+    }, 16);
+    countObserver.unobserve(el);
+  });
+}, {threshold: 0.5});
+countEls.forEach(el => countObserver.observe(el));
+
+// ── カードホバー（タッチデバイス対応）──
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-6px)');
+  card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0)');
+});
+</script>
 </body>
 </html>
