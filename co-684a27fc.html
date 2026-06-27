@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三光金型株式会社 | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+  .tab-btn:hover{color:#cf2e2e!important}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#cf2e2e55,#ffffff,#ff690033,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><img src="data:image/png;base64,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" alt="三光金型株式会社" style="height:40px;max-width:160px;object-fit:contain;"></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" data-nav="Business" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Business</a><a href="#" data-nav="事業内容" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">事業内容</a><a href="#" data-nav="製品情報" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">製品情報</a><a href="#" data-nav="News" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">News</a><a href="#" data-nav="Recruit" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Recruit</a><a href="#" data-nav="About" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">About</a><a href="#" data-nav="会社概要" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">会社概要</a><a href="#" data-nav="社是・環境方針・セキュリティアクション" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">社是・環境方針・セキュリティアクション</a><a href="#" data-nav="事業所一覧" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">事業所一覧</a><a href="#" data-nav="設備一覧" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">設備一覧</a></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:#111;position:relative;">
+  <div class="slide active" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://www.sanko-mold.co.jp/wp/wp-content/themes/sanko-mold/image/view-ttl.png');opacity:0.65;transition:opacity 1.2s ease;"></div>
+<div class="slide " style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://www.sanko-mold.co.jp/wp/wp-content/uploads/2022/09/main_visual02.png');opacity:0;transition:opacity 1.2s ease;"></div>
+<div class="slide " style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://www.sanko-mold.co.jp/wp/wp-content/themes/sanko-mold/image/concept-img.png');opacity:0;transition:opacity 1.2s ease;"></div>
+<div class="slide " style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://www.sanko-mold.co.jp/wp/wp-content/themes/sanko-mold/image/btn_b.png');opacity:0;transition:opacity 1.2s ease;"></div>
+<div class="slide " style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('https://www.sanko-mold.co.jp/wp/wp-content/themes/sanko-mold/image/business_ttl.png');opacity:0;transition:opacity 1.2s ease;"></div>
+
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
+      信頼をかたちに、世界へ。
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      金型設計から量産まで一貫対応。ベトナム・タイ海外拠点でグローバル品質を届ける愛知のモノづくり企業
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#cf2e2e;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #cf2e2e66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">三光金型株式会社について</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">金型設計〜量産を一貫受注</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">試作金型から量産品まで社内完結。スイッチ・シートベルト部品など自動車部品で豊富な実績</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">海外生産拠点でグローバル対応</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">ベトナム（2000年）・タイ（2012年）に拠点を構え、現地日系企業のニーズに即応</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">信頼される人と会社づくり</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">社是「信頼される、信頼できる、人と会社づくり」を体現する徹底した品質管理</div>
+      </div>
+  </div>
+</section>
+
+
+<!-- ニュース・お知らせ -->
+<section style="padding:72px 40px;max-width:860px;margin:0 auto;">
+  <div class="fade-up" style="margin-bottom:36px;">
+    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:10px;text-transform:uppercase;">NEWS</div>
+    <h2 style="font-size:clamp(20px,3vw,30px);font-weight:900;">お知らせ</h2>
+  </div>
+  <ul class="fade-up" style="list-style:none;"><li style="display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid #e0e0e0;"><span style="font-size:12px;color:#555555;white-space:nowrap;min-width:90px;"></span><span style="font-size:14px;color:#1a1a1a;line-height:1.6;">About 会社概要</span></li><li style="display:flex;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid #e0e0e0;"><span style="font-size:12px;color:#555555;white-space:nowrap;min-width:90px;"></span><span style="font-size:14px;color:#1a1a1a;line-height:1.6;">社是・環境方針・セキュリティアクション</span></li></ul>
+</section>
+
+
+<!-- 会社情報 -->
+<section style="padding:56px 40px;max-width:860px;margin:0 auto;">
+  <div class="fade-up" style="margin-bottom:28px;">
+    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:10px;text-transform:uppercase;">COMPANY</div>
+    <h2 style="font-size:clamp(18px,3vw,26px);font-weight:900;">会社情報</h2>
+  </div>
+  <div class="fade-up"><div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #e0e0e0;"><span style="font-size:12px;color:#555555;min-width:80px;font-weight:700;">所在地</span><span style="font-size:14px;color:#1a1a1a;">愛知県みよし市三好町半野木1-130</span></div><div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #e0e0e0;"><span style="font-size:12px;color:#555555;min-width:80px;font-weight:700;">電話番号</span><span style="font-size:14px;color:#1a1a1a;">0561341505</span></div></div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 三光金型株式会社</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">金型設計・品質管理の帳票作成や海外工場とのやり取りをAIで大幅に効率化できます</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずは30分、AIデモを体験してみる
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E4%B8%89%E5%85%89%E9%87%91%E5%9E%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#cf2e2e;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #cf2e2e55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0">
+  このページは 三光金型株式会社 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+
+
+// 画像スライダー
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  if(!slides.length) return;
+  let cur = 0;
+  setInterval(()=>{
+    slides[cur].style.opacity='0';
+    cur = (cur+1) % slides.length;
+    slides[cur].style.opacity='0.65';
+  }, 4000);
+})();
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
