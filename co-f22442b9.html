@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>豊川電気工事株式会社 | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#cf2e2e55,#ffffff,#cf2e2e33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><img src="data:image/png;base64,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" alt="豊川電気工事株式会社" style="height:40px;max-width:160px;object-fit:contain;"></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">ごあいさつ Greeting</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">新着情報 News</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">事業紹介 Services</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">よくある質問 FAQ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">会社概要 Company</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">お問い合わせ Contact</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">0533-84-1078</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">ごあいさつ Greeting</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">新着情報 News</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">事業紹介 Services</a></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:#111;position:relative;">
+  <img src="data:image/jpeg;base64,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" alt="豊川電気工事株式会社" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#ffffff;
+         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
+      地域に根ざして、57年。
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      昭和43年創業。豊川の電気配線・設備工事を確かな技術で。
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#cf2e2e;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #cf2e2e66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">豊川電気工事株式会社について</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">住宅の電気工事</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">新築・リフォームの配線やLAN・アンテナ。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">工場・設備工事</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">電灯・動力配線や防犯灯まで幅広く対応。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">EV充電器・壁掛けテレビ</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">暮らしの新しい電気設備にも対応します。</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 豊川電気工事株式会社</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">作業説明や見積書、よくある質問・ブログ記事の作成をAIで時短し、現場の工事に集中できます。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#cf2e2e;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずはAIデモを見てみる
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E8%B1%8A%E5%B7%9D%E9%9B%BB%E6%B0%97%E5%B7%A5%E4%BA%8B%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#cf2e2e;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #cf2e2e55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 豊川電気工事株式会社 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>

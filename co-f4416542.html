@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>有限会社ヤマロク食品（ガマゴリうどん） | AIリニューアルサンプル</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+
+  .anim-down{animation:fadeDown .7s ease both}
+  .anim-up1{animation:fadeUp .8s .15s ease both}
+  .anim-up2{animation:fadeUp .8s .30s ease both}
+  .anim-up3{animation:fadeUp .8s .45s ease both}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+
+  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
+  .card{transition:transform .25s ease,box-shadow .25s ease}
+
+  .cta-grad{
+    background:linear-gradient(270deg,#2563eb55,#ffffff,#2563eb33,#ffffff);
+    background-size:400% 400%;
+    animation:gradShift 7s ease infinite;
+  }
+
+  .badge-ai{
+    position:relative;overflow:hidden;
+    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+    display:inline-block;padding:6px 20px;border-radius:20px;
+    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
+  }
+  .badge-ai::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:shimmer 2.5s infinite;
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー（実ナビそのまま） -->
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
+     border-bottom:1px solid #e0e0e0;
+     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
+     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <div><img src="data:image/png;base64,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" alt="有限会社ヤマロク食品（ガマゴリうどん）" style="height:40px;max-width:160px;object-fit:contain;"></div>
+  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"></nav>
+</header>
+
+<!-- ヒーロー -->
+<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+     text-align:center;padding:80px 32px;background:linear-gradient(145deg,#ffffff 0%,#2563eb22 60%,#ffffff 100%);">
+  
+  <div style="max-width:760px;position:relative;z-index:1;">
+    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
+         line-height:1.15;margin-bottom:22px;color:#1a1a1a;
+         ">
+      蒲郡の味、ガマゴリうどん。
+    </h1>
+    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
+         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
+      ご当地グルメ「ガマゴリうどん」を蒲郡から全国へ。
+    </p>
+    <div class="anim-up3">
+      <a href="#ai-section" style="display:inline-block;background:#2563eb;color:#ffffff;
+           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
+           text-decoration:none;box-shadow:0 8px 32px #2563eb66;margin-right:16px;
+           transition:transform .2s,box-shadow .2s;"
+         onmouseover="this.style.transform='scale(1.04)'"
+         onmouseout="this.style.transform='scale(1)'">
+        AIリニューアルの詳細を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 事業セクション（実HPの見出しベース） -->
+<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
+  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
+    <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
+    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">有限会社ヤマロク食品（ガマゴリうどん）について</h2>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;">
+    
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">ガマゴリうどん</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">蒲郡が誇るご当地グルメの本格うどん。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">こだわりの製麺</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">麺ひとすじ、地域に愛される味づくり。</div>
+      </div>
+      <div class="card fade-up" style="background:#f5f5f5;
+           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
+           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
+        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
+        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">ご家庭・贈り物に</div>
+        <div style="font-size:14px;color:#555555;line-height:1.7;">蒲郡の味をご自宅やギフトでお楽しみ。</div>
+      </div>
+  </div>
+</section>
+
+<!-- AI提案セクション -->
+<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
+     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:40px;">
+      <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 有限会社ヤマロク食品（ガマゴリうどん）</div>
+      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
+      <p style="color:#555555;font-size:15px;line-height:1.9;">
+        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#2563eb;">商品紹介文やレシピ記事、販促文面の作成をAIで時短し、麺づくりと販路開拓に集中できます。</strong>
+      </p>
+    </div>
+    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
+         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="32">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="400">0</div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      </div>
+      <div style="flex:1;min-width:180px;text-align:center;">
+        <div style="font-size:44px;font-weight:900;color:#2563eb;">10<span style="font-size:22px;">万</span></div>
+        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-grad" style="padding:100px 40px;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:32px;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
+        まずはAIデモを見てみる
+      </h2>
+      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
+        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      </p>
+    </div>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%9C%89%E9%99%90%E4%BC%9A%E7%A4%BE%E3%83%A4%E3%83%9E%E3%83%AD%E3%82%AF%E9%A3%9F%E5%93%81%EF%BC%88%E3%82%AC%E3%83%9E%E3%82%B4%E3%83%AA%E3%81%86%E3%81%A9%E3%82%93%EF%BC%89様 AI研修のご相談" class="fade-up"
+       style="display:inline-block;background:#2563eb;color:#ffffff;
+            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
+            text-decoration:none;box-shadow:0 8px 40px #2563eb55;letter-spacing:.5px;
+            transition:transform .2s,box-shadow .2s;"
+       onmouseover="this.style.transform='scale(1.04)'"
+       onmouseout="this.style.transform='scale(1)'">
+      30分だけ話を聞いてみる →
+    </a>
+    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
+      強引な営業は一切しません
+    </p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer style="padding:36px 40px;text-align:center;font-size:12px;
+     background:#f0f0f0;color:#888888;
+     border-top:1px solid #e0e0e0;">
+  このページは 有限会社ヤマロク食品（ガマゴリうどん） 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+</footer>
+
+<script>
+// スクロールアニメーション
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
+    let cur = 0; const step = target / (dur/16);
+    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    cio.unobserve(el);
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+</script>
+</body>
+</html>
