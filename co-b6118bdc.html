@@ -4,198 +4,442 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>おそうじ本舗田原店 | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#4E5C9D;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#4E5C9D!important}
+.header-cta{
+  background:#4E5C9D;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#122061;}
 
-  .anim-down{animation:fadeDown .7s ease both}
-  .anim-up1{animation:fadeUp .8s .15s ease both}
-  .anim-up2{animation:fadeUp .8s .30s ease both}
-  .anim-up3{animation:fadeUp .8s .45s ease both}
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#4E5C9D;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#122061;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
 
-  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .fade-up.visible{opacity:1;transform:translateY(0)}
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:900;color:rgba(0,0,0,0.03);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+}
+.label-badge{
+  display:inline-block;background:#4E5C9D;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
 
-  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
-  .card{transition:transform .25s ease,box-shadow .25s ease}
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
 
-  .cta-grad{
-    background:linear-gradient(270deg,#4E5C9D55,#ffffff,#4E5C9D33,#ffffff);
-    background-size:400% 400%;
-    animation:gradShift 7s ease infinite;
-  }
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
 
-  .badge-ai{
-    position:relative;overflow:hidden;
-    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
-    display:inline-block;padding:6px 20px;border-radius:20px;
-    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
-  }
-  .badge-ai::after{
-    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-    animation:shimmer 2.5s infinite;
-  }
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#4E5C9D;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA */
+#cta-section{
+  padding:120px 60px;text-align:center;
+  background:#fff;border-top:1px solid #eee;
+}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- ヘッダー（実ナビそのまま） -->
-<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
-     border-bottom:1px solid #e0e0e0;
-     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div><img src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="おそうじ本舗田原店" style="height:40px;max-width:160px;object-fit:contain;"></div>
-  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">おそうじ本舗田原店</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">ホーム</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">サービス内容</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">クリーニングメニュー</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">エアコン</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">キッチンまわり</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">水まわり</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">特急便</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">営業エリア</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#4E5C9D'" onmouseout="this.style.color='#333333'">お問い合わせ</a></nav>
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><img src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="おそうじ本舗田原店" style="height:36px;max-width:140px;object-fit:contain;"></div>
+    <nav>
+      <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">おそうじ本舗田原店</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホーム</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">サービス内容</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">クリーニングメニュー</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">エアコン</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">キッチンまわり</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">水まわり</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">特急便</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4E5C9D;transition:width .25s ease;"></span></li></ul>
+    </nav>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E3%81%8A%E3%81%9D%E3%81%86%E3%81%98%E6%9C%AC%E8%88%97%E7%94%B0%E5%8E%9F%E5%BA%97様 AI研修のご相談" class="header-cta">お問い合わせ</a>
+  </div>
 </header>
 
 <!-- ヒーロー -->
-<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     text-align:center;padding:80px 32px;background:#111;position:relative;">
-  <img src="data:image/jpeg;base64,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" alt="おそうじ本舗田原店" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
-  <div style="max-width:760px;position:relative;z-index:1;">
-    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
-    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
-         line-height:1.15;margin-bottom:22px;color:#ffffff;
-         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
-      きれいを、お急ぎでも。
-    </h1>
-    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
-         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
-      田原のハウスクリーニング・遺品整理・片付け。最短で対応。
-    </p>
-    <div class="anim-up3">
-      <a href="#ai-section" style="display:inline-block;background:#4E5C9D;color:#ffffff;
-           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
-           text-decoration:none;box-shadow:0 8px 32px #4E5C9D66;margin-right:16px;
-           transition:transform .2s,box-shadow .2s;"
-         onmouseover="this.style.transform='scale(1.04)'"
-         onmouseout="this.style.transform='scale(1)'">
-        AIリニューアルの詳細を見る
-      </a>
+<section id="hero">
+  <div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_1fc8066703744702a9d48e66fac797c2~mv2.png/v1/fill/w_63,h_61,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5583615_edited.png') center/cover;opacity:0.55;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_6ddd96f93aba45acabaaa0711196968b~mv2.jpg/v1/fill/w_153,h_102,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/7d077b_6ddd96f93aba45acabaaa0711196968b~mv2.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_b3fe41faf3e44d88a08fb80d6f440f88~mv2.jpg/v1/fill/w_419,h_86,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5583624_edited.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_ad96e04d770840e5b5f24cb0cbe4eeb7~mv2.jpg/v1/fill/w_600,h_143,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/AdobeStock_468121789%20(2)_edited.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_d545d9cb390446fdb6faf1cd1b0dc175~mv2.jpg/v1/fill/w_52,h_35,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/7d077b_d545d9cb390446fdb6faf1cd1b0dc175~mv2.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">田原の暮らしをピカピカに</h1>
+    <p class="hero-en">おそうじ本舗田原店</p>
+    <p class="hero-sub">ハウスクリーニング・遺品整理・草刈りまで一手に</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
+    </a>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">お</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">田原の暮らしをピカピカに</h2>
+      <p class="mission-en">おそうじ本舗田原店</p>
+      <p class="mission-desc">愛知県田原市 ハウスクリーニング、遺品整理</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #4E5C9D;color:#4E5C9D;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        ハウスクリーニング、店舗・オフィスクリーニング、不要品や遺品
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">エアコン キッチンまわり 水まわり 特急便 営業エリア お問い合わせ</p>
     </div>
   </div>
 </section>
 
-<!-- 事業セクション（実HPの見出しベース） -->
-<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
-  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
-    <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
-    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">おそうじ本舗田原店について</h2>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:24px;">
-    
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #4E5C9D;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
-        <div style="font-size:16px;font-weight:800;color:#4E5C9D;margin-bottom:8px;line-height:1.4;">ハウスクリーニング</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">キッチン・エアコン・水まわりを徹底洗浄。</div>
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">おそうじ本舗田原店の事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_1fc8066703744702a9d48e66fac797c2~mv2.png/v1/fill/w_63,h_61,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5583615_edited.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">ハウスクリーニング</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">エアコン・キッチン・水まわりを徹底的に清掃</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4E5C9D;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #4E5C9D;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
-        <div style="font-size:16px;font-weight:800;color:#4E5C9D;margin-bottom:8px;line-height:1.4;">店舗・オフィス清掃</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">事業所の清掃もまとめてお任せ。</div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_6ddd96f93aba45acabaaa0711196968b~mv2.jpg/v1/fill/w_153,h_102,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/7d077b_6ddd96f93aba45acabaaa0711196968b~mv2.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">店舗・オフィス清掃</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">最短対応の特急便で急ぎの清掃ニーズにも対応</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4E5C9D;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #4E5C9D;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
-        <div style="font-size:16px;font-weight:800;color:#4E5C9D;margin-bottom:8px;line-height:1.4;">不要品処分・遺品整理</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">引越や片付け、遺品整理もサポート。</div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/7d077b_b3fe41faf3e44d88a08fb80d6f440f88~mv2.jpg/v1/fill/w_419,h_86,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5583624_edited.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">遺品整理・不用品処分</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">引越・片付け・草刈り・剪定まで幅広くサポート</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4E5C9D;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
+    </div>
+    </div>
   </div>
 </section>
 
-<!-- AI提案セクション -->
-<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
-     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:40px;">
-      <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × おそうじ本舗田原店</div>
-      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
-      <p style="color:#555555;font-size:15px;line-height:1.9;">
-        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
-        Canal AIの研修を受ければ、<strong style="color:#4E5C9D;">サービス紹介やお見積り文面、ブログ発信の作成をAIで時短し、清掃の現場に集中できます。</strong>
+<!-- フィーチャー -->
+<section id='features' style='padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;'>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row-reverse;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 02</div>
+          <p style="font-size:15px;line-height:2;color:#333;">エアコン キッチンまわり 水まわり 特急便 営業エリア お問い合わせ</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://static.wixstatic.com/media/7d077b_d545d9cb390446fdb6faf1cd1b0dc175~mv2.jpg/v1/fill/w_52,h_35,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/7d077b_d545d9cb390446fdb6faf1cd1b0dc175~mv2.jpg') center/cover;"></div>
+    </div></section>
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#4E5C9D;font-weight:700;letter-spacing:1px;border-bottom:1px solid #4E5C9D;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#4E5C9D;font-weight:700;letter-spacing:1px;">2024.03</span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">最新情報は公式HPをご覧ください</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">TEL</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">0531-23-4588</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#4E5C9D15,#4E5C9D30);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:900;color:#4E5C9D;opacity:0.12;line-height:1;">お</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#4E5C9D;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        <div style='margin-top:12px;font-size:22px;font-weight:900;color:#333;letter-spacing:2px;'>0531-23-4588</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#4E5C9D;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × おそうじ本舗田原店</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#4E5C9D;">見積書・作業報告書・リピーター案内メールをAIで自動作成</strong>
       </p>
     </div>
-    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
-         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#4E5C9D;" class="count-target" data-target="32">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#4E5C9D;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
       </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#4E5C9D;" class="count-target" data-target="400">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#4E5C9D;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
       </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#4E5C9D;">10<span style="font-size:22px;">万</span></div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#4E5C9D;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-grad" style="padding:100px 40px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
-      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
-        まずはAIデモを見てみる
+<section id="cta-section" style="padding:120px 60px;text-align:center;background:#fff;border-top:1px solid #eee;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">NEXT STEP</div>
+      <h2 style="font-size:clamp(26px,5vw,48px);font-weight:900;color:#1a1a1a;line-height:1.2;margin:16px 0 24px;">
+        30分・無料相談はこちら
       </h2>
-      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
-        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      <p style="font-size:15px;color:#888;line-height:2;margin-bottom:48px;">
+        30分のオンライン相談から。<br>費用・資料送付など気軽にご相談ください。
       </p>
+      <a href="mailto:baba.so.hotaru@gmail.com?subject=%E3%81%8A%E3%81%9D%E3%81%86%E3%81%98%E6%9C%AC%E8%88%97%E7%94%B0%E5%8E%9F%E5%BA%97様 AI研修のご相談" style="display:inline-flex;align-items:center;gap:16px;
+           background:#4E5C9D;color:#ffffff;font-size:16px;font-weight:700;
+           padding:20px 56px;letter-spacing:0.05em;
+           transition:background .2s,transform .2s;"
+         onmouseover="this.style.background='#122061';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.background='#4E5C9D';this.style.transform='translateY(0)'">
+        30分だけ話を聞いてみる　→
+      </a>
+      <p style="margin-top:20px;font-size:12px;color:#bbb;">強引な営業は一切しません</p>
     </div>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E3%81%8A%E3%81%9D%E3%81%86%E3%81%98%E6%9C%AC%E8%88%97%E7%94%B0%E5%8E%9F%E5%BA%97様 AI研修のご相談" class="fade-up"
-       style="display:inline-block;background:#4E5C9D;color:#ffffff;
-            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
-            text-decoration:none;box-shadow:0 8px 40px #4E5C9D55;letter-spacing:.5px;
-            transition:transform .2s,box-shadow .2s;"
-       onmouseover="this.style.transform='scale(1.04)'"
-       onmouseout="this.style.transform='scale(1)'">
-      30分だけ話を聞いてみる →
-    </a>
-    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
-      強引な営業は一切しません
-    </p>
   </div>
 </section>
 
 <!-- フッター -->
-<footer style="padding:36px 40px;text-align:center;font-size:12px;
-     background:#f0f0f0;color:#888888;
-     border-top:1px solid #e0e0e0;">
-  このページは おそうじ本舗田原店 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">おそうじ本舗田原店</div>
+  <div>このページは おそうじ本舗田原店 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
 </footer>
 
 <script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
 // スクロールアニメーション
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
 // カウントアップ
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
-    let cur = 0; const step = target / (dur/16);
-    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
     cio.unobserve(el);
   });
-}, {threshold:0.5});
-document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+
+(function(){
+  const s = document.querySelectorAll('.hslide');
+  if(!s.length) return;
+  let c = 0;
+  setInterval(()=>{
+    s[c].style.opacity = '0';
+    c = (c+1) % s.length;
+    s[c].style.opacity = '0.55';
+  }, 4500);
+})();
 </script>
 </body>
 </html>
