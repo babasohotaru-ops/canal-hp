@@ -543,13 +543,11 @@ function submitContactForm() {
   }
   let lines = [
     '【ご希望のサービス】',
-    services.length ? services.map(s => '・' + s).join('
-') : '・（未選択）',
+    services.length ? services.map(s => '・' + s).join('\n') : '・（未選択）',
     '', '【ご相談の段階】', '・' + stage,
     '', '【ご希望の連絡方法】', '・' + contact,
     '', '【連絡可能な時間帯】',
-    times.length ? times.map(t => '・' + t).join('
-') : '・（未選択）',
+    times.length ? times.map(t => '・' + t).join('\n') : '・（未選択）',
     '', '【ご連絡先】', 'お名前：' + name
   ];
   if (area) lines.push('市区町村：' + area);
@@ -557,8 +555,7 @@ function submitContactForm() {
   if (email) lines.push('メールアドレス：' + email);
   if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
   lines.push('', '---', 'このお問い合わせは 株式会社杉浦自動車 様のHPデモよりいただきました。');
-  const body = lines.join('
-');
+  const body = lines.join('\n');
   window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('株式会社杉浦自動車様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
 }
 
