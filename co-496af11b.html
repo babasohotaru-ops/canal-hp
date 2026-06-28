@@ -4,198 +4,537 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>株式会社クロスボーダー | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#8b1a1a;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#8b1a1a!important}
+.header-cta{
+  background:#8b1a1a;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#4f0000;}
 
-  .anim-down{animation:fadeDown .7s ease both}
-  .anim-up1{animation:fadeUp .8s .15s ease both}
-  .anim-up2{animation:fadeUp .8s .30s ease both}
-  .anim-up3{animation:fadeUp .8s .45s ease both}
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#8b1a1a;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#4f0000;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
 
-  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .fade-up.visible{opacity:1;transform:translateY(0)}
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:400;color:rgba(0,0,0,0.045);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+  font-family:'Yuji Syuku',serif;
+}
+.label-badge{
+  display:inline-block;background:#8b1a1a;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
 
-  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
-  .card{transition:transform .25s ease,box-shadow .25s ease}
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#8b1a1a;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
 
-  .cta-grad{
-    background:linear-gradient(270deg,#2563eb55,#ffffff,#2563eb33,#ffffff);
-    background-size:400% 400%;
-    animation:gradShift 7s ease infinite;
-  }
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
 
-  .badge-ai{
-    position:relative;overflow:hidden;
-    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
-    display:inline-block;padding:6px 20px;border-radius:20px;
-    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
-  }
-  .badge-ai::after{
-    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-    animation:shimmer 2.5s infinite;
-  }
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#8b1a1a;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA / お問い合わせフォーム */
+#cta-section{
+  padding:100px 60px;background:#fafafa;border-top:1px solid #eee;
+}
+.form-check,.form-radio{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:10px 14px;border:1.5px solid #eee;font-size:14px;
+  margin:0 0 6px;transition:border-color .2s;
+}
+.form-check:hover,.form-radio:hover{border-color:#8b1a1a;}
+.form-check input,.form-radio input{accent-color:#8b1a1a;width:16px;height:16px;flex-shrink:0;}
+.form-check-sub{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;}
+.form-check-sub input{accent-color:#8b1a1a;width:14px;height:14px;flex-shrink:0;}
+.cf-input{width:100%;padding:10px 14px;border:1.5px solid #ddd;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;}
+.cf-input:focus{border-color:#8b1a1a;}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- ヘッダー（実ナビそのまま） -->
-<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
-     border-bottom:1px solid #e0e0e0;
-     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div><span style="font-size:18px;font-weight:900;color:#2563eb;">株式会社クロスボーダー</span></div>
-  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"></nav>
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><span style="font-size:20px;font-weight:900;letter-spacing:-0.5px;color:#1a1a1a;">株式会社クロ</span></div>
+    <nav>
+      <ul class="nav-list"></ul>
+    </nav>
+    <a href="#cta-section" class="header-cta">お問い合わせ</a>
+  </div>
 </header>
 
 <!-- ヒーロー -->
-<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     text-align:center;padding:80px 32px;background:linear-gradient(145deg,#ffffff 0%,#2563eb22 60%,#ffffff 100%);">
-  
-  <div style="max-width:760px;position:relative;z-index:1;">
-    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
-    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
-         line-height:1.15;margin-bottom:22px;color:#1a1a1a;
-         ">
-      SNS運用、プロに任せる。
-    </h1>
-    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
-         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
-      愛知県発、SNS運用代行で企業の情報発信をサポートします。
-    </p>
-    <div class="anim-up3">
-      <a href="#ai-section" style="display:inline-block;background:#2563eb;color:#ffffff;
-           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
-           text-decoration:none;box-shadow:0 8px 32px #2563eb66;margin-right:16px;
-           transition:transform .2s,box-shadow .2s;"
-         onmouseover="this.style.transform='scale(1.04)'"
-         onmouseout="this.style.transform='scale(1)'">
-        AIリニューアルの詳細を見る
-      </a>
-    </div>
-  </div>
-</section>
+<section id="hero">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#4f0000 0%,#8b1a1a 100%);opacity:0.9;"></div>
 
-<!-- 事業セクション（実HPの見出しベース） -->
-<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
-  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
-    <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
-    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">株式会社クロスボーダーについて</h2>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:24px;">
-    
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
-        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">SNS運用代行サービス</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">企業のSNSアカウント運用を丸ごとお任せいただけます。</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
-        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">対応エリア・実績</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">愛知県を拠点に、各種SNSの運用支援を行っています。</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #2563eb;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
-        <div style="font-size:16px;font-weight:800;color:#2563eb;margin-bottom:8px;line-height:1.4;">クロスボーダーが選ばれる理由</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">SNS運用に特化したプロチームが貴社の発信を支えます。</div>
-      </div>
-  </div>
-</section>
-
-<!-- AI提案セクション -->
-<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
-     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:40px;">
-      <div style="font-size:11px;color:#2563eb;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 株式会社クロスボーダー</div>
-      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
-      <p style="color:#555555;font-size:15px;line-height:1.9;">
-        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
-        Canal AIの研修を受ければ、<strong style="color:#2563eb;">投稿文案の自動生成やデータ分析をAIで効率化し、SNS運用の工数を大幅に削減できます。</strong>
-      </p>
-    </div>
-    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
-         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="32">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#2563eb;" class="count-target" data-target="400">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#2563eb;">10<span style="font-size:22px;">万</span></div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-grad" style="padding:100px 40px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
-      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
-        まずはAIデモを見てみる
-      </h2>
-      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
-        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
-      </p>
-    </div>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%9C%E3%83%BC%E3%83%80%E3%83%BC様 AI研修のご相談" class="fade-up"
-       style="display:inline-block;background:#2563eb;color:#ffffff;
-            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
-            text-decoration:none;box-shadow:0 8px 40px #2563eb55;letter-spacing:.5px;
-            transition:transform .2s,box-shadow .2s;"
-       onmouseover="this.style.transform='scale(1.04)'"
-       onmouseout="this.style.transform='scale(1)'">
-      30分だけ話を聞いてみる →
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">SNSで境界を超える</h1>
+    <p class="hero-en">株式会社クロスボーダー</p>
+    <p class="hero-sub">クライアントのSNS運用を代行し、デジタル集客を加速させるプロ集団</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
     </a>
-    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
-      強引な営業は一切しません
-    </p>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">ク</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">SNSで境界を超える</h2>
+      <p class="mission-en">株式会社クロスボーダー</p>
+      <p class="mission-desc">クライアントのSNS運用を代行し、デジタル集客を加速させるプロ集団</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #8b1a1a;color:#8b1a1a;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        SNSで境界を超える
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">クライアントのSNS運用を代行し、デジタル集客を加速させるプロ集団</p>
+    </div>
+  </div>
+</section>
+
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">株式会社クロスボーダーの事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#4f0000,#8b1a1a);opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#8b1a1a;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">SNS運用代行</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">各プラットフォームに最適なコンテンツ制作と運用を代行</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#8b1a1a;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#4f0000,#8b1a1a);opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#8b1a1a;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">デジタルマーケティング支援</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">SNSを活用した集客・ブランディング戦略を提案</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#8b1a1a;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#4f0000,#8b1a1a);opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#8b1a1a;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">効果測定・レポーティング</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">データに基づく改善提案でSNS施策の成果を最大化</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#8b1a1a;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- フィーチャー -->
+
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#8b1a1a;font-weight:700;letter-spacing:1px;border-bottom:1px solid #8b1a1a;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#8b1a1a;font-weight:700;letter-spacing:1px;">2024.03</span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">最新情報は公式HPをご覧ください</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody><tr><td colspan="2" style="padding:16px 0;color:#888;font-size:14px;">公式HPをご確認ください</td></tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#8b1a1a15,#8b1a1a30);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:400;color:#8b1a1a;opacity:0.15;line-height:1;font-family:'Yuji Syuku',serif;">ク</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#8b1a1a;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#8b1a1a;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × 株式会社クロスボーダ</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#8b1a1a;">SNS投稿コンテンツのAI自動生成・エンゲージメント分析で、1人当たりの運用アカウント数を大幅に拡大</strong>
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#8b1a1a;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
+      </div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#8b1a1a;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
+      </div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#8b1a1a;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせフォーム -->
+<section id="cta-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">CONTACT</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;color:#1a1a1a;text-align:center;line-height:1.3;margin:16px 0 12px;">
+        AIデモを30分で体感する
+      </h2>
+      <p style="text-align:center;font-size:14px;color:#888;line-height:1.9;margin-bottom:40px;">
+        選択するだけでOK。30秒で送れます。<br>強引な営業は一切しません。
+      </p>
+
+      <div style="background:#fff;padding:40px;border:1px solid #e8e8e8;">
+
+        <!-- ① ご希望のサービス -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;margin-bottom:14px;">① ご希望のサービス（複数選択可）</div>
+          <label class="form-check"><input type="checkbox" name="service" value="HP制作・リニューアル"><span>HP制作・リニューアル</span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="AI研修"><span>AI研修</span></label>
+          <div style="border:1.5px solid #eee;padding:14px 16px;margin:0 0 6px;">
+            <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">業務自動化</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-left:4px;">
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：営業・見積書作成"><span>営業・見積書作成</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：請求書・経理処理"><span>請求書・経理処理</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：顧客対応・メール返信"><span>顧客対応・メール返信</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：現場報告書・日報作成"><span>現場報告書・日報作成</span></label>
+            </div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="service" value="補助金活用サポート"><span>補助金活用サポート<small style="color:#888;font-size:12px;margin-left:6px;">IT導入補助金・ものづくり補助金など</small></span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="まずは話だけ聞きたい"><span>まずは話だけ聞きたい</span></label>
+        </div>
+
+        <!-- ② ご相談の段階 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;margin-bottom:14px;">② ご相談の段階</div>
+          <label class="form-radio"><input type="radio" name="stage" value="料金・見積もりを知りたい"><span>料金・見積もりを知りたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="サービス内容をもっと詳しく聞きたい"><span>サービス内容をもっと詳しく聞きたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="現地調査・訪問を依頼したい"><span>現地調査・訪問を依頼したい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="とりあえず気軽に相談したい"><span>とりあえず気軽に相談したい</span></label>
+        </div>
+
+        <!-- ③ 連絡方法 + ④ 時間帯 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;margin-bottom:14px;">③ ご希望の連絡方法</div>
+            <label class="form-radio"><input type="radio" name="contact" value="電話で折り返してほしい"><span>電話で折り返してほしい</span></label>
+            <label class="form-radio"><input type="radio" name="contact" value="メールで返信してほしい"><span>メールで返信してほしい</span></label>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;margin-bottom:14px;">④ 連絡可能な時間帯</div>
+            <label class="form-check"><input type="checkbox" name="time" value="午前中（9〜12時）"><span>午前中（9〜12時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="午後（12〜18時）"><span>午後（12〜18時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="夜間（18時〜）"><span>夜間（18時〜）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="いつでも可"><span>いつでも可</span></label>
+          </div>
+        </div>
+
+        <!-- ⑤ ご連絡先 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;margin-bottom:14px;">⑤ ご連絡先</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">お名前 <span style="color:#8b1a1a;font-size:10px;">必須</span></label>
+              <input id="cf-name" type="text" placeholder="山田 太郎" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">市区町村</label>
+              <input id="cf-area" type="text" placeholder="碧南市" class="cf-input">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">電話番号</label>
+              <input id="cf-phone" type="tel" placeholder="0566-XX-XXXX" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">メールアドレス</label>
+              <input id="cf-email" type="email" placeholder="example@mail.com" class="cf-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 自由記述 -->
+        <div style="margin-bottom:32px;">
+          <label style="font-size:11px;font-weight:800;letter-spacing:3px;color:#8b1a1a;display:block;margin-bottom:14px;">⑥ その他・ご要望（任意）</label>
+          <textarea id="cf-msg" rows="3" placeholder="なくてもOKです" class="cf-input" style="resize:vertical;line-height:1.8;"></textarea>
+        </div>
+
+        <button onclick="submitContactForm()" style="width:100%;background:#8b1a1a;color:#ffffff;font-size:16px;font-weight:700;padding:20px;border:none;cursor:pointer;letter-spacing:0.05em;transition:background .2s,transform .2s;"
+          onmouseover="this.style.background='#4f0000';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#8b1a1a';this.style.transform='translateY(0)'">
+          内容を確認してメールを送る　→
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:12px;color:#bbb;">お使いのメールアプリが開きます。送信ボタンを押すと完了です。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- フッター -->
-<footer style="padding:36px 40px;text-align:center;font-size:12px;
-     background:#f0f0f0;color:#888888;
-     border-top:1px solid #e0e0e0;">
-  このページは 株式会社クロスボーダー 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">株式会社クロスボーダー</div>
+  <div>このページは 株式会社クロスボーダー 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
 </footer>
 
 <script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
 // スクロールアニメーション
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
 // カウントアップ
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
-    let cur = 0; const step = target / (dur/16);
-    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
     cio.unobserve(el);
   });
-}, {threshold:0.5});
-document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+function submitContactForm() {
+  const services = [...document.querySelectorAll('[name="service"]:checked')].map(el => el.value);
+  const stageEl = document.querySelector('[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : '（未選択）';
+  const contactEl = document.querySelector('[name="contact"]:checked');
+  const contact = contactEl ? contactEl.value : '（未選択）';
+  const times = [...document.querySelectorAll('[name="time"]:checked')].map(el => el.value);
+  const name = document.getElementById('cf-name').value.trim();
+  const area = document.getElementById('cf-area').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name) {
+    alert('お名前をご入力ください');
+    document.getElementById('cf-name').focus();
+    return;
+  }
+  let lines = [
+    '【ご希望のサービス】',
+    services.length ? services.map(s => '・' + s).join('\n') : '・（未選択）',
+    '', '【ご相談の段階】', '・' + stage,
+    '', '【ご希望の連絡方法】', '・' + contact,
+    '', '【連絡可能な時間帯】',
+    times.length ? times.map(t => '・' + t).join('\n') : '・（未選択）',
+    '', '【ご連絡先】', 'お名前：' + name
+  ];
+  if (area) lines.push('市区町村：' + area);
+  if (phone) lines.push('電話番号：' + phone);
+  if (email) lines.push('メールアドレス：' + email);
+  if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
+  lines.push('', '---', 'このお問い合わせは 株式会社クロスボーダー 様のHPデモよりいただきました。');
+  const body = lines.join('\n');
+  window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('株式会社クロスボーダー様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
+}
+
+
 </script>
 </body>
 </html>
