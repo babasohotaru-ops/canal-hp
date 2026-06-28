@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>株式会社ジーニアスウェブ | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#4a287e;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#4a287e!important}
+.header-cta{
+  background:#4a287e;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#0e0042;}
+
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#4a287e;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#0e0042;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
+
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:400;color:rgba(0,0,0,0.045);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+  font-family:'Yuji Syuku',serif;
+}
+.label-badge{
+  display:inline-block;background:#4a287e;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
+
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#4a287e;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
+
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
+
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#4a287e;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA / お問い合わせフォーム */
+#cta-section{
+  padding:100px 60px;background:#fafafa;border-top:1px solid #eee;
+}
+.form-check,.form-radio{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:10px 14px;border:1.5px solid #eee;font-size:14px;
+  margin:0 0 6px;transition:border-color .2s;
+}
+.form-check:hover,.form-radio:hover{border-color:#4a287e;}
+.form-check input,.form-radio input{accent-color:#4a287e;width:16px;height:16px;flex-shrink:0;}
+.form-check-sub{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;}
+.form-check-sub input{accent-color:#4a287e;width:14px;height:14px;flex-shrink:0;}
+.cf-input{width:100%;padding:10px 14px;border:1.5px solid #ddd;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;}
+.cf-input:focus{border-color:#4a287e;}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><img src="data:image/gif;base64,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" alt="株式会社ジーニアスウェブ" style="height:36px;max-width:140px;object-fit:contain;"></div>
+    <nav>
+      <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">phone</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホーム</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">サービス</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">営業支援型ホームページ制作</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">売れる仕組み作りソリューション</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">見込み客を今すぐ集める広告運用支援</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">成果のでるサイト改善</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">WordPressの保守</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#4a287e;transition:width .25s ease;"></span></li></ul>
+    </nav>
+    <a href="#cta-section" class="header-cta">お問い合わせ</a>
+  </div>
+</header>
+
+<!-- ヒーロー -->
+<section id="hero">
+  <div class="hslide" style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/f6890b3e7276d3cf4cd3ff9e10d002c7b90a0de85d0e97be59f390d4b469bbbe.gif') center/cover;opacity:0.55;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/1c508fed3cd747d366ad2ac899c4526cb461837bb237b601580a8d20aabdf688.gif') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/5a950c2939af03739ee27e732b0de5538a02959c059ce2a39c7fb9f99cb7ea91.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202603/1293728e72a05f380af1a06d41cc72786c71092217df0c0ad2f6c3b48eec9db1.png') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/media/007/202506/lrm.png?v=20250612180516') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">売れる仕組みを、型で作る</h1>
+    <p class="hero-en">株式会社ジーニアスウェブ</p>
+    <p class="hero-sub">中小企業の集客・採用・営業を一気通貫で解決するWeb戦略パートナー</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
+    </a>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">ジ</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">売れる仕組みを、型で作る</h2>
+      <p class="mission-en">株式会社ジーニアスウェブ</p>
+      <p class="mission-desc">[電話受付] 9:00〜18:00(土日・祝日 除く)</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #4a287e;color:#4a287e;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        伝わらなければ、無いのと同じです。
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">伝わらなければ、無いのと同じです。 あなたのホームページには会社の強みや魅力が100％説明されていますか？ 集客がうまくいかないのは説明が十分でないからです。 私たちはそのギャップを埋め、見込み客が反応するページと仕組みをつくります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">株式会社ジーニアスウェブの事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/f6890b3e7276d3cf4cd3ff9e10d002c7b90a0de85d0e97be59f390d4b469bbbe.gif') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4a287e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">伝わらなければ、無いのと同じです。</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">強みを100%説明し見込み客が反応するページを制作</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4a287e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/1c508fed3cd747d366ad2ac899c4526cb461837bb237b601580a8d20aabdf688.gif') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4a287e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">営業支援型ホームページ制作</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">商談がスムーズになる情報設計で営業活動をラクにする</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4a287e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.genius-web.co.jp/archives/001/202207/5a950c2939af03739ee27e732b0de5538a02959c059ce2a39c7fb9f99cb7ea91.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#4a287e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">売れる仕組み作りソリューション</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">強い営業マン不在でも仕組みで売上を安定させる</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#4a287e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- フィーチャー -->
+<section id='features' style='padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;'>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row-reverse;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#4a287e;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 02</div>
+          <p style="font-size:15px;line-height:2;color:#333;">伝わらなければ、無いのと同じです。 あなたのホームページには会社の強みや魅力が100％説明されていますか？ 集客がうまくいかないのは説明が十分でないからです。 私たちはそのギャップを埋め、見込み客が反応するページと仕組みをつくります。</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://www.genius-web.co.jp/media/007/202506/lrm.png?v=20250612180516') center/cover;"></div>
+    </div></section>
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#4a287e;font-weight:700;letter-spacing:1px;border-bottom:1px solid #4a287e;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#4a287e;font-weight:700;letter-spacing:1px;">2026-04-22</span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">弱者の戦略で市場を切り拓く 中小企業の経営者様、営業担当者様へ</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">TEL</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">06-6341-1005</td>
+        </tr>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">代表取締役</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">あいさつ</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#4a287e15,#4a287e30);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:400;color:#4a287e;opacity:0.15;line-height:1;font-family:'Yuji Syuku',serif;">ジ</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#4a287e;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        <div style='margin-top:12px;font-size:22px;font-weight:900;color:#333;letter-spacing:2px;'>06-6341-1005</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#4a287e;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × 株式会社ジーニアスウ</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#4a287e;">クライアント向けLP原稿・強み言語化をAI自動生成し、制作リードタイムを半減させる</strong>
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#4a287e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
+      </div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#4a287e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
+      </div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#4a287e;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせフォーム -->
+<section id="cta-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">CONTACT</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;color:#1a1a1a;text-align:center;line-height:1.3;margin:16px 0 12px;">
+        AIデモを30分で体感する
+      </h2>
+      <p style="text-align:center;font-size:14px;color:#888;line-height:1.9;margin-bottom:40px;">
+        選択するだけでOK。30秒で送れます。<br>強引な営業は一切しません。
+      </p>
+
+      <div style="background:#fff;padding:40px;border:1px solid #e8e8e8;">
+
+        <!-- ① ご希望のサービス -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;margin-bottom:14px;">① ご希望のサービス（複数選択可）</div>
+          <label class="form-check"><input type="checkbox" name="service" value="HP制作・リニューアル"><span>HP制作・リニューアル</span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="AI研修"><span>AI研修</span></label>
+          <div style="border:1.5px solid #eee;padding:14px 16px;margin:0 0 6px;">
+            <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">業務自動化</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-left:4px;">
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：営業・見積書作成"><span>営業・見積書作成</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：請求書・経理処理"><span>請求書・経理処理</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：顧客対応・メール返信"><span>顧客対応・メール返信</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：現場報告書・日報作成"><span>現場報告書・日報作成</span></label>
+            </div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="service" value="補助金活用サポート"><span>補助金活用サポート<small style="color:#888;font-size:12px;margin-left:6px;">IT導入補助金・ものづくり補助金など</small></span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="まずは話だけ聞きたい"><span>まずは話だけ聞きたい</span></label>
+        </div>
+
+        <!-- ② ご相談の段階 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;margin-bottom:14px;">② ご相談の段階</div>
+          <label class="form-radio"><input type="radio" name="stage" value="料金・見積もりを知りたい"><span>料金・見積もりを知りたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="サービス内容をもっと詳しく聞きたい"><span>サービス内容をもっと詳しく聞きたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="現地調査・訪問を依頼したい"><span>現地調査・訪問を依頼したい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="とりあえず気軽に相談したい"><span>とりあえず気軽に相談したい</span></label>
+        </div>
+
+        <!-- ③ 連絡方法 + ④ 時間帯 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;margin-bottom:14px;">③ ご希望の連絡方法</div>
+            <label class="form-radio"><input type="radio" name="contact" value="電話で折り返してほしい"><span>電話で折り返してほしい</span></label>
+            <label class="form-radio"><input type="radio" name="contact" value="メールで返信してほしい"><span>メールで返信してほしい</span></label>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;margin-bottom:14px;">④ 連絡可能な時間帯</div>
+            <label class="form-check"><input type="checkbox" name="time" value="午前中（9〜12時）"><span>午前中（9〜12時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="午後（12〜18時）"><span>午後（12〜18時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="夜間（18時〜）"><span>夜間（18時〜）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="いつでも可"><span>いつでも可</span></label>
+          </div>
+        </div>
+
+        <!-- ⑤ ご連絡先 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;margin-bottom:14px;">⑤ ご連絡先</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">お名前 <span style="color:#4a287e;font-size:10px;">必須</span></label>
+              <input id="cf-name" type="text" placeholder="山田 太郎" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">市区町村</label>
+              <input id="cf-area" type="text" placeholder="碧南市" class="cf-input">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">電話番号</label>
+              <input id="cf-phone" type="tel" placeholder="0566-XX-XXXX" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">メールアドレス</label>
+              <input id="cf-email" type="email" placeholder="example@mail.com" class="cf-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 自由記述 -->
+        <div style="margin-bottom:32px;">
+          <label style="font-size:11px;font-weight:800;letter-spacing:3px;color:#4a287e;display:block;margin-bottom:14px;">⑥ その他・ご要望（任意）</label>
+          <textarea id="cf-msg" rows="3" placeholder="なくてもOKです" class="cf-input" style="resize:vertical;line-height:1.8;"></textarea>
+        </div>
+
+        <button onclick="submitContactForm()" style="width:100%;background:#4a287e;color:#ffffff;font-size:16px;font-weight:700;padding:20px;border:none;cursor:pointer;letter-spacing:0.05em;transition:background .2s,transform .2s;"
+          onmouseover="this.style.background='#0e0042';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#4a287e';this.style.transform='translateY(0)'">
+          内容を確認してメールを送る　→
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:12px;color:#bbb;">お使いのメールアプリが開きます。送信ボタンを押すと完了です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">株式会社ジーニアスウェブ</div>
+  <div>このページは 株式会社ジーニアスウェブ 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
+</footer>
+
+<script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
+// スクロールアニメーション
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+// カウントアップ
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
+    cio.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+function submitContactForm() {
+  const services = [...document.querySelectorAll('[name="service"]:checked')].map(el => el.value);
+  const stageEl = document.querySelector('[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : '（未選択）';
+  const contactEl = document.querySelector('[name="contact"]:checked');
+  const contact = contactEl ? contactEl.value : '（未選択）';
+  const times = [...document.querySelectorAll('[name="time"]:checked')].map(el => el.value);
+  const name = document.getElementById('cf-name').value.trim();
+  const area = document.getElementById('cf-area').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name) {
+    alert('お名前をご入力ください');
+    document.getElementById('cf-name').focus();
+    return;
+  }
+  let lines = [
+    '【ご希望のサービス】',
+    services.length ? services.map(s => '・' + s).join('\n') : '・（未選択）',
+    '', '【ご相談の段階】', '・' + stage,
+    '', '【ご希望の連絡方法】', '・' + contact,
+    '', '【連絡可能な時間帯】',
+    times.length ? times.map(t => '・' + t).join('\n') : '・（未選択）',
+    '', '【ご連絡先】', 'お名前：' + name
+  ];
+  if (area) lines.push('市区町村：' + area);
+  if (phone) lines.push('電話番号：' + phone);
+  if (email) lines.push('メールアドレス：' + email);
+  if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
+  lines.push('', '---', 'このお問い合わせは 株式会社ジーニアスウェブ 様のHPデモよりいただきました。');
+  const body = lines.join('\n');
+  window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('株式会社ジーニアスウェブ様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
+}
+
+
+(function(){
+  const s = document.querySelectorAll('.hslide');
+  if(!s.length) return;
+  let c = 0;
+  setInterval(()=>{
+    s[c].style.opacity = '0';
+    c = (c+1) % s.length;
+    s[c].style.opacity = '0.55';
+  }, 4500);
+})();
+</script>
+</body>
+</html>
