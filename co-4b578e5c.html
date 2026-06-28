@@ -4,198 +4,585 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>合同会社フレックスプランニング | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#cf2e2e;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#cf2e2e!important}
+.header-cta{
+  background:#cf2e2e;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#930000;}
 
-  .anim-down{animation:fadeDown .7s ease both}
-  .anim-up1{animation:fadeUp .8s .15s ease both}
-  .anim-up2{animation:fadeUp .8s .30s ease both}
-  .anim-up3{animation:fadeUp .8s .45s ease both}
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#cf2e2e;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#930000;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
 
-  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .fade-up.visible{opacity:1;transform:translateY(0)}
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:400;color:rgba(0,0,0,0.045);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+  font-family:'Yuji Syuku',serif;
+}
+.label-badge{
+  display:inline-block;background:#cf2e2e;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
 
-  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
-  .card{transition:transform .25s ease,box-shadow .25s ease}
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
 
-  .cta-grad{
-    background:linear-gradient(270deg,#cf2e2e55,#ffffff,#cf2e2e33,#ffffff);
-    background-size:400% 400%;
-    animation:gradShift 7s ease infinite;
-  }
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
 
-  .badge-ai{
-    position:relative;overflow:hidden;
-    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
-    display:inline-block;padding:6px 20px;border-radius:20px;
-    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
-  }
-  .badge-ai::after{
-    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-    animation:shimmer 2.5s infinite;
-  }
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA / お問い合わせフォーム */
+#cta-section{
+  padding:100px 60px;background:#fafafa;border-top:1px solid #eee;
+}
+.form-check,.form-radio{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:10px 14px;border:1.5px solid #eee;font-size:14px;
+  margin:0 0 6px;transition:border-color .2s;
+}
+.form-check:hover,.form-radio:hover{border-color:#cf2e2e;}
+.form-check input,.form-radio input{accent-color:#cf2e2e;width:16px;height:16px;flex-shrink:0;}
+.form-check-sub{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;}
+.form-check-sub input{accent-color:#cf2e2e;width:14px;height:14px;flex-shrink:0;}
+.cf-input{width:100%;padding:10px 14px;border:1.5px solid #ddd;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;}
+.cf-input:focus{border-color:#cf2e2e;}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- ヘッダー（実ナビそのまま） -->
-<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
-     border-bottom:1px solid #e0e0e0;
-     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEgElEQVRYhdWWWWxUVRjHf+fOPi1dhi7QQGlo0yABDJaGRRLZhKSaYlIfMBgCPrgBRkRDDOISXvTFQAzEsChRSCigQkiUFJBYaYEQMS0l2DqFspUC0zLTdmY6y73Hh9IZrnemM1Ui8Xs65zvn/32/s93vCiml5DGa8jiTP1KAUDTAzb42wmpoRDrzUENKiX/bMVT3nZQi4bRir5mJtaIUgJ6BLj49txx/xEu2rYCNs/aTYckeGUDo5EV6136dNnn/1h8Zc2cnSqaDrv6r+CNeAHyhu3QHO9MGiB2BcFjTTg5AIIx6zTMyTQKL7YDt6UnkHn4P1d2VdHLwu3NEzrTF+kp+VtqJ3PcvcKOvlacKnyXblmcEAHAsrRw2SKiuKda2VEzEVJDeNrf2nGfb72tQZZS6jj18NOcH7Gbn4CLSXUHwQCOhuuZY3/nqwrR0Hb5L7Gh6F1VGAfBHfES0+EsxJxMOmZQS//Zj9K77Ji6aVIRz5fyUyVvunearlvcJqYGYr7psNaOsuakBpJSET7XQu6mWSGP83HFYyNm7FmFNzu4Leaj94zPqbx4E4h/aeeOXsbD4Zd1cQxQZDOPfeYLA7p+JNl/XD9otuA6tj73/ZPZl09u6vkDh+dI3WFKyCiHE8AC+DXsJfHHMEFQpHo1r/zqss8uNYyL5VcpzjGP5Ex9S7qpIOG4AEDa9S2TYcL65mFEf1KBkORMGKcosw6LYdJcrw5LDogkrmD9+GRaTLSmg+Hs11PqD9G2qRe3yYls0FUfNLJScjKQBhqzDd4nzXT+hSZXSnCeZlj8Pq8meUmcA+K/tH1XDE233eW73Rd467CYU1f4VQMrvQCL7+Pg1Plk8gR1nb3PK7WVJeRbqxQ1ofZeH1QlhRpn4OqaxVYkB1h9tp67tfkoAjz/C9jOdtHsGKMtzILsbUN2fp9RJQPa3Jgbwh1S+vXA3ZZAha+70c/K1aRTn2pHBcrDmQ/heSp3IX6DrxwCcVoW5JVmc7uhNC0ADinMf3HIZxVyxC0Ipds+SifLQ6nUAQggOrZhMjz9Csmfxwp5L/Nk9AMDkgsFvgoz0Ej4+FaK+tMBxlmCdfw5hL9ADAChCkJeZ+Mek3RPkSs9ArF81yTXYUAMQ7U8vOUCgA+3mAUxla4wAyczjj/DKwVbUB1uTZTPx0vTBFQj7GMyzv0d6GpLq5cAttBv74n0tHGunBDjl9vLO0XZu9cZFGxcUk+OIS01F1VBUnTi5lKjN63U+Jf+Z4QE0Kalv97GtsZNfrurPtmZKHisrC1NxI6VEei+gXt6MdvtIzC8Kq1By44XJAHCkxcPmE9e57jP+3784NY+tS0sNJVUH721CdW9Bu1cPgSv6QWcJlopdOpehFlRs+Y0bvrBuUqZVYdOiCaycUThscoBIQzVa11GDX7jmYJlZi3CO0/kNtWBJuSvWdjnMrJ49lrNrp7OqckzK5AAid4YuvBg9F3PlPizzfjUkh0TlWErqr/iwmQQzxo/CYhpZvZJSQ3afBakisqcgHvr/Swj8vyzHj9L+AjMvpNtGZDfCAAAAAElFTkSuQmCC" alt="合同会社フレックスプランニング" style="height:40px;max-width:160px;object-fit:contain;"></div>
-  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">MENU</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">HOME</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">サービス案内</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">ホームぺージ制作</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">Webコンサルティング</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">CMS開発</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">スマホ最適化・レスポンシブ対応</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">運用・保守</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">制作実績</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">制作の流れ</a></nav>
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEgElEQVRYhdWWWWxUVRjHf+fOPi1dhi7QQGlo0yABDJaGRRLZhKSaYlIfMBgCPrgBRkRDDOISXvTFQAzEsChRSCigQkiUFJBYaYEQMS0l2DqFspUC0zLTdmY6y73Hh9IZrnemM1Ui8Xs65zvn/32/s93vCiml5DGa8jiTP1KAUDTAzb42wmpoRDrzUENKiX/bMVT3nZQi4bRir5mJtaIUgJ6BLj49txx/xEu2rYCNs/aTYckeGUDo5EV6136dNnn/1h8Zc2cnSqaDrv6r+CNeAHyhu3QHO9MGiB2BcFjTTg5AIIx6zTMyTQKL7YDt6UnkHn4P1d2VdHLwu3NEzrTF+kp+VtqJ3PcvcKOvlacKnyXblmcEAHAsrRw2SKiuKda2VEzEVJDeNrf2nGfb72tQZZS6jj18NOcH7Gbn4CLSXUHwQCOhuuZY3/nqwrR0Hb5L7Gh6F1VGAfBHfES0+EsxJxMOmZQS//Zj9K77Ji6aVIRz5fyUyVvunearlvcJqYGYr7psNaOsuakBpJSET7XQu6mWSGP83HFYyNm7FmFNzu4Leaj94zPqbx4E4h/aeeOXsbD4Zd1cQxQZDOPfeYLA7p+JNl/XD9otuA6tj73/ZPZl09u6vkDh+dI3WFKyCiHE8AC+DXsJfHHMEFQpHo1r/zqss8uNYyL5VcpzjGP5Ex9S7qpIOG4AEDa9S2TYcL65mFEf1KBkORMGKcosw6LYdJcrw5LDogkrmD9+GRaTLSmg+Hs11PqD9G2qRe3yYls0FUfNLJScjKQBhqzDd4nzXT+hSZXSnCeZlj8Pq8meUmcA+K/tH1XDE233eW73Rd467CYU1f4VQMrvQCL7+Pg1Plk8gR1nb3PK7WVJeRbqxQ1ofZeH1QlhRpn4OqaxVYkB1h9tp67tfkoAjz/C9jOdtHsGKMtzILsbUN2fp9RJQPa3Jgbwh1S+vXA3ZZAha+70c/K1aRTn2pHBcrDmQ/heSp3IX6DrxwCcVoW5JVmc7uhNC0ADinMf3HIZxVyxC0Ipds+SifLQ6nUAQggOrZhMjz9Csmfxwp5L/Nk9AMDkgsFvgoz0Ej4+FaK+tMBxlmCdfw5hL9ADAChCkJeZ+Mek3RPkSs9ArF81yTXYUAMQ7U8vOUCgA+3mAUxla4wAyczjj/DKwVbUB1uTZTPx0vTBFQj7GMyzv0d6GpLq5cAttBv74n0tHGunBDjl9vLO0XZu9cZFGxcUk+OIS01F1VBUnTi5lKjN63U+Jf+Z4QE0Kalv97GtsZNfrurPtmZKHisrC1NxI6VEei+gXt6MdvtIzC8Kq1By44XJAHCkxcPmE9e57jP+3784NY+tS0sNJVUH721CdW9Bu1cPgSv6QWcJlopdOpehFlRs+Y0bvrBuUqZVYdOiCaycUThscoBIQzVa11GDX7jmYJlZi3CO0/kNtWBJuSvWdjnMrJ49lrNrp7OqckzK5AAid4YuvBg9F3PlPizzfjUkh0TlWErqr/iwmQQzxo/CYhpZvZJSQ3afBakisqcgHvr/Swj8vyzHj9L+AjMvpNtGZDfCAAAAAElFTkSuQmCC" alt="合同会社フレックスプランニング" style="height:36px;max-width:140px;object-fit:contain;"></div>
+    <nav>
+      <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">MENU</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">HOME</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">サービス案内</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホームぺージ制作</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">Webコンサルティング</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">CMS開発</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">スマホ最適化・レスポンシブ対応</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">運用・保守</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li></ul>
+    </nav>
+    <a href="#cta-section" class="header-cta">お問い合わせ</a>
+  </div>
 </header>
 
 <!-- ヒーロー -->
-<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     text-align:center;padding:80px 32px;background:#111;position:relative;">
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANIAAACqCAYAAADY6BHuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDphYWQ1NTA0Ny1hMDUzLWI2NDQtYWI3YS0wNTU4MzE5YTY4OGUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEI2NTg4MTlCOTA1MTFFNzhFODRENEQ3QUQ4OTkzMEEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEI2NTg4MThCOTA1MTFFNzhFODRENEQ3QUQ4OTkzMEEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ZTkyMTA0MjUtZmNkZS1kMzQ2LThkYTgtYzM0ZTc2NDBmYzk2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOmFhZDU1MDQ3LWEwNTMtYjY0NC1hYjdhLTA1NTgzMTlhNjg4ZSIv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" alt="合同会社フレックスプランニング" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
-  <div style="max-width:760px;position:relative;z-index:1;">
-    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
-    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
-         line-height:1.15;margin-bottom:22px;color:#ffffff;
-         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
-      大阪発、価値あるWeb制作
-    </h1>
-    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
-         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
-      デザイン・SEO・使いやすさを多角的に分析し、費用対効果の高いサイトを。
-    </p>
-    <div class="anim-up3">
-      <a href="#ai-section" style="display:inline-block;background:#cf2e2e;color:#ffffff;
-           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
-           text-decoration:none;box-shadow:0 8px 32px #cf2e2e66;margin-right:16px;
-           transition:transform .2s,box-shadow .2s;"
-         onmouseover="this.style.transform='scale(1.04)'"
-         onmouseout="this.style.transform='scale(1)'">
-        AIリニューアルの詳細を見る
-      </a>
-    </div>
-  </div>
-</section>
+<section id="hero">
+  <div class="hslide" style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/themes/fptheme/img/index/greet_fukidashi.png') center/cover;opacity:0.55;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2026/02/fukushima_thumb-400x300.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2026/01/kawachi1-400x300.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2024/07/daihokan01.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2023/03/r477-400x300.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
 
-<!-- 事業セクション（実HPの見出しベース） -->
-<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
-  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
-    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
-    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">合同会社フレックスプランニングについて</h2>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:24px;">
-    
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">ユーザーにとって有益なコミュニケーションを創り出す</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">ユーザー中心設計をもとに目的達成の仕組みとアイディアを提供</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">ホームページ制作のポイント Point</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">デザインだけでなくSEO・コンテンツ・使いやすさを多角的に分析</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">お客様の声 Voice</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">大阪府訪問看護ステーション協会様など実績多数のリアルな評価</div>
-      </div>
-  </div>
-</section>
-
-<!-- AI提案セクション -->
-<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
-     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:40px;">
-      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 合同会社フレックスプランニング</div>
-      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
-      <p style="color:#555555;font-size:15px;line-height:1.9;">
-        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
-        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">HP制作の提案書作成やSEO文章をAIで効率化し、対応件数と品質を同時に向上。</strong>
-      </p>
-    </div>
-    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
-         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="32">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="400">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;">10<span style="font-size:22px;">万</span></div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-grad" style="padding:100px 40px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
-      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
-        まずはAIデモを無料で見てみる
-      </h2>
-      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
-        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
-      </p>
-    </div>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E5%90%88%E5%90%8C%E4%BC%9A%E7%A4%BE%E3%83%95%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9%E3%83%97%E3%83%A9%E3%83%B3%E3%83%8B%E3%83%B3%E3%82%B0様 AI研修のご相談" class="fade-up"
-       style="display:inline-block;background:#cf2e2e;color:#ffffff;
-            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
-            text-decoration:none;box-shadow:0 8px 40px #cf2e2e55;letter-spacing:.5px;
-            transition:transform .2s,box-shadow .2s;"
-       onmouseover="this.style.transform='scale(1.04)'"
-       onmouseout="this.style.transform='scale(1)'">
-      30分だけ話を聞いてみる →
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">大阪のHP・Webコンサル</h1>
+    <p class="hero-en">合同会社フレックスプランニング</p>
+    <p class="hero-sub">20年・2000社超の実績で大阪の企業をWebで支援する会社</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
     </a>
-    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
-      強引な営業は一切しません
-    </p>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">フ</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">大阪のHP・Webコンサル</h2>
+      <p class="mission-en">合同会社フレックスプランニング</p>
+      <p class="mission-desc">当サイトを快適にご利用いただくには、ブラウザでJavaScriptを有効にしてください。</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #cf2e2e;color:#cf2e2e;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        ユーザーにとって有益なコミュニケーションを創り出す
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">インターネット上には、様々な機能を持ったWebサイトが存在します。 企業ブランディングをするコーポレートサイト、良い人材を確保するための リクルートサイト、商品販売を行うECサイト等々。 しかし、 「ユーザー目線」 「ビジネス目線」 「クリエイティブ目線」 といった、 多角的な視点でバランス良く制作されたWebサイトはそう多くはありません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">合同会社フレックスプランニングの事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/themes/fptheme/img/index/greet_fukidashi.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">ユーザーにとって有益なコミュニケーションを創り出す</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">ユーザー・ビジネス・クリエイティブの三視点でHP制作</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2026/02/fukushima_thumb-400x300.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">制作実績 Works</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">2000社以上の実績から蓄積した技術とノウハウで提供</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2026/01/kawachi1-400x300.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">ホームページ制作のポイント Point</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">使いやすさ・コンテンツ・SEO対策など多視点で分析</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- フィーチャー -->
+<section id='features' style='padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;'>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 01</div>
+          <p style="font-size:15px;line-height:2;color:#333;">当サイトを快適にご利用いただくには、ブラウザでJavaScriptを有効にしてください。</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2024/07/daihokan01.jpg') center/cover;"></div>
+    </div>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row-reverse;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 02</div>
+          <p style="font-size:15px;line-height:2;color:#333;">インターネット上には、様々な機能を持ったWebサイトが存在します。 企業ブランディングをするコーポレートサイト、良い人材を確保するための リクルートサイト、商品販売を行うECサイト等々。 しかし、 「ユーザー目線」 「ビジネス目線」 「クリエイティブ目線」 といった、 多角的な視点でバランス良く制作されたWebサイトはそう多くはありません。</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://www.flex-planning.com/wp/wp-content/uploads/2023/03/r477-400x300.jpg') center/cover;"></div>
+    </div></section>
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#cf2e2e;font-weight:700;letter-spacing:1px;border-bottom:1px solid #cf2e2e;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">2026/06/12 お知らせ ホームページ保守・更新サービス「Web担サポート」をリリースしました</span>
+      </li>
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">2026/02/19 お知らせ 臨時休業のお知らせ／3月6日（金）</span>
+      </li>
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">2025/11/21 お知らせ 2025年 年末年始営業のご案内</span>
+      </li>
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">2025/07/09 お知らせ 2025年 夏季休業のご案内</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">TEL</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">06-4400-0221</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#cf2e2e15,#cf2e2e30);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:400;color:#cf2e2e;opacity:0.15;line-height:1;font-family:'Yuji Syuku',serif;">フ</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#cf2e2e;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        <div style='margin-top:12px;font-size:22px;font-weight:900;color:#333;letter-spacing:2px;'>06-4400-0221</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × 合同会社フレックスプ</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">クライアント提案書・SEO記事・更新コンテンツ作成をAI化し制作効率を向上</strong>
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
+      </div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
+      </div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせフォーム -->
+<section id="cta-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">CONTACT</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;color:#1a1a1a;text-align:center;line-height:1.3;margin:16px 0 12px;">
+        まずはAIデモを見てみる
+      </h2>
+      <p style="text-align:center;font-size:14px;color:#888;line-height:1.9;margin-bottom:40px;">
+        選択するだけでOK。30秒で送れます。<br>強引な営業は一切しません。
+      </p>
+
+      <div style="background:#fff;padding:40px;border:1px solid #e8e8e8;">
+
+        <!-- ① ご希望のサービス -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">① ご希望のサービス（複数選択可）</div>
+          <label class="form-check"><input type="checkbox" name="service" value="HP制作・リニューアル"><span>HP制作・リニューアル</span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="AI研修"><span>AI研修</span></label>
+          <div style="border:1.5px solid #eee;padding:14px 16px;margin:0 0 6px;">
+            <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">業務自動化</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-left:4px;">
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：営業・見積書作成"><span>営業・見積書作成</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：請求書・経理処理"><span>請求書・経理処理</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：顧客対応・メール返信"><span>顧客対応・メール返信</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：現場報告書・日報作成"><span>現場報告書・日報作成</span></label>
+            </div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="service" value="補助金活用サポート"><span>補助金活用サポート<small style="color:#888;font-size:12px;margin-left:6px;">IT導入補助金・ものづくり補助金など</small></span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="まずは話だけ聞きたい"><span>まずは話だけ聞きたい</span></label>
+        </div>
+
+        <!-- ② ご相談の段階 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">② ご相談の段階</div>
+          <label class="form-radio"><input type="radio" name="stage" value="料金・見積もりを知りたい"><span>料金・見積もりを知りたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="サービス内容をもっと詳しく聞きたい"><span>サービス内容をもっと詳しく聞きたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="現地調査・訪問を依頼したい"><span>現地調査・訪問を依頼したい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="とりあえず気軽に相談したい"><span>とりあえず気軽に相談したい</span></label>
+        </div>
+
+        <!-- ③ 連絡方法 + ④ 時間帯 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">③ ご希望の連絡方法</div>
+            <label class="form-radio"><input type="radio" name="contact" value="電話で折り返してほしい"><span>電話で折り返してほしい</span></label>
+            <label class="form-radio"><input type="radio" name="contact" value="メールで返信してほしい"><span>メールで返信してほしい</span></label>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">④ 連絡可能な時間帯</div>
+            <label class="form-check"><input type="checkbox" name="time" value="午前中（9〜12時）"><span>午前中（9〜12時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="午後（12〜18時）"><span>午後（12〜18時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="夜間（18時〜）"><span>夜間（18時〜）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="いつでも可"><span>いつでも可</span></label>
+          </div>
+        </div>
+
+        <!-- ⑤ ご連絡先 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">⑤ ご連絡先</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">お名前 <span style="color:#cf2e2e;font-size:10px;">必須</span></label>
+              <input id="cf-name" type="text" placeholder="山田 太郎" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">市区町村</label>
+              <input id="cf-area" type="text" placeholder="碧南市" class="cf-input">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">電話番号</label>
+              <input id="cf-phone" type="tel" placeholder="0566-XX-XXXX" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">メールアドレス</label>
+              <input id="cf-email" type="email" placeholder="example@mail.com" class="cf-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 自由記述 -->
+        <div style="margin-bottom:32px;">
+          <label style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;display:block;margin-bottom:14px;">⑥ その他・ご要望（任意）</label>
+          <textarea id="cf-msg" rows="3" placeholder="なくてもOKです" class="cf-input" style="resize:vertical;line-height:1.8;"></textarea>
+        </div>
+
+        <button onclick="submitContactForm()" style="width:100%;background:#cf2e2e;color:#ffffff;font-size:16px;font-weight:700;padding:20px;border:none;cursor:pointer;letter-spacing:0.05em;transition:background .2s,transform .2s;"
+          onmouseover="this.style.background='#930000';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#cf2e2e';this.style.transform='translateY(0)'">
+          内容を確認してメールを送る　→
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:12px;color:#bbb;">お使いのメールアプリが開きます。送信ボタンを押すと完了です。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- フッター -->
-<footer style="padding:36px 40px;text-align:center;font-size:12px;
-     background:#f0f0f0;color:#888888;
-     border-top:1px solid #e0e0e0;">
-  このページは 合同会社フレックスプランニング 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">合同会社フレックスプランニング</div>
+  <div>このページは 合同会社フレックスプランニング 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
 </footer>
 
 <script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
 // スクロールアニメーション
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
 // カウントアップ
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
-    let cur = 0; const step = target / (dur/16);
-    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
     cio.unobserve(el);
   });
-}, {threshold:0.5});
-document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+function submitContactForm() {
+  const services = [...document.querySelectorAll('[name="service"]:checked')].map(el => el.value);
+  const stageEl = document.querySelector('[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : '（未選択）';
+  const contactEl = document.querySelector('[name="contact"]:checked');
+  const contact = contactEl ? contactEl.value : '（未選択）';
+  const times = [...document.querySelectorAll('[name="time"]:checked')].map(el => el.value);
+  const name = document.getElementById('cf-name').value.trim();
+  const area = document.getElementById('cf-area').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name) {
+    alert('お名前をご入力ください');
+    document.getElementById('cf-name').focus();
+    return;
+  }
+  let lines = [
+    '【ご希望のサービス】',
+    services.length ? services.map(s => '・' + s).join('\n') : '・（未選択）',
+    '', '【ご相談の段階】', '・' + stage,
+    '', '【ご希望の連絡方法】', '・' + contact,
+    '', '【連絡可能な時間帯】',
+    times.length ? times.map(t => '・' + t).join('\n') : '・（未選択）',
+    '', '【ご連絡先】', 'お名前：' + name
+  ];
+  if (area) lines.push('市区町村：' + area);
+  if (phone) lines.push('電話番号：' + phone);
+  if (email) lines.push('メールアドレス：' + email);
+  if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
+  lines.push('', '---', 'このお問い合わせは 合同会社フレックスプランニング 様のHPデモよりいただきました。');
+  const body = lines.join('\n');
+  window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('合同会社フレックスプランニング様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
+}
+
+
+(function(){
+  const s = document.querySelectorAll('.hslide');
+  if(!s.length) return;
+  let c = 0;
+  setInterval(()=>{
+    s[c].style.opacity = '0';
+    c = (c+1) % s.length;
+    s[c].style.opacity = '0.55';
+  }, 4500);
+})();
 </script>
 </body>
 </html>
