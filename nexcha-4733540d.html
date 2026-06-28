@@ -4,198 +4,580 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>株式会社NEXCHA | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#cf2e2e;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#cf2e2e!important}
+.header-cta{
+  background:#cf2e2e;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#930000;}
 
-  .anim-down{animation:fadeDown .7s ease both}
-  .anim-up1{animation:fadeUp .8s .15s ease both}
-  .anim-up2{animation:fadeUp .8s .30s ease both}
-  .anim-up3{animation:fadeUp .8s .45s ease both}
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#cf2e2e;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#930000;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
 
-  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .fade-up.visible{opacity:1;transform:translateY(0)}
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:400;color:rgba(0,0,0,0.045);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+  font-family:'Yuji Syuku',serif;
+}
+.label-badge{
+  display:inline-block;background:#cf2e2e;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
 
-  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
-  .card{transition:transform .25s ease,box-shadow .25s ease}
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
 
-  .cta-grad{
-    background:linear-gradient(270deg,#cf2e2e55,#ffffff,#cf2e2e33,#ffffff);
-    background-size:400% 400%;
-    animation:gradShift 7s ease infinite;
-  }
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
 
-  .badge-ai{
-    position:relative;overflow:hidden;
-    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
-    display:inline-block;padding:6px 20px;border-radius:20px;
-    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
-  }
-  .badge-ai::after{
-    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-    animation:shimmer 2.5s infinite;
-  }
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA / お問い合わせフォーム */
+#cta-section{
+  padding:100px 60px;background:#fafafa;border-top:1px solid #eee;
+}
+.form-check,.form-radio{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:10px 14px;border:1.5px solid #eee;font-size:14px;
+  margin:0 0 6px;transition:border-color .2s;
+}
+.form-check:hover,.form-radio:hover{border-color:#cf2e2e;}
+.form-check input,.form-radio input{accent-color:#cf2e2e;width:16px;height:16px;flex-shrink:0;}
+.form-check-sub{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;}
+.form-check-sub input{accent-color:#cf2e2e;width:14px;height:14px;flex-shrink:0;}
+.cf-input{width:100%;padding:10px 14px;border:1.5px solid #ddd;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;}
+.cf-input:focus{border-color:#cf2e2e;}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- ヘッダー（実ナビそのまま） -->
-<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
-     border-bottom:1px solid #e0e0e0;
-     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div><img src="data:image/png;base64,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" alt="株式会社NEXCHA" style="height:40px;max-width:160px;object-fit:contain;"></div>
-  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">ホーム</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">NEXCHAとは</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">web制作実績</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">web制作の流れ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">よくある質問</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">会社概要</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">お問い合わせ</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">≫トピックス一覧</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">≫SEO対策</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#cf2e2e'" onmouseout="this.style.color='#333333'">≫採用情報</a></nav>
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><img src="data:image/png;base64,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" alt="株式会社NEXCHA" style="height:36px;max-width:140px;object-fit:contain;"></div>
+    <nav>
+      <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホーム</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">NEXCHAとは</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">web制作実績</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">web制作の流れ</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">よくある質問</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">会社概要</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">お問い合わせ</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">≫トピックス一覧</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li></ul>
+    </nav>
+    <a href="#cta-section" class="header-cta">お問い合わせ</a>
+  </div>
 </header>
 
 <!-- ヒーロー -->
-<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     text-align:center;padding:80px 32px;background:#111;position:relative;">
-  <img src="data:image/png;base64,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" alt="株式会社NEXCHA" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
-  <div style="max-width:760px;position:relative;z-index:1;">
-    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
-    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
-         line-height:1.15;margin-bottom:22px;color:#ffffff;
-         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
-      お客様と共に、成長するWeb制作
-    </h1>
-    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
-         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
-      大阪を拠点に、WordPressやレスポンシブ対応のホームページ制作をご提供します。
-    </p>
-    <div class="anim-up3">
-      <a href="#ai-section" style="display:inline-block;background:#cf2e2e;color:#ffffff;
-           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
-           text-decoration:none;box-shadow:0 8px 32px #cf2e2e66;margin-right:16px;
-           transition:transform .2s,box-shadow .2s;"
-         onmouseover="this.style.transform='scale(1.04)'"
-         onmouseout="this.style.transform='scale(1)'">
-        AIリニューアルの詳細を見る
-      </a>
-    </div>
-  </div>
-</section>
+<section id="hero">
+  <div class="hslide" style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/sp/menu01.png') center/cover;opacity:0.55;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/sp/menu03.png') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/tel01.png') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/ttl01.png') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('http://demo.whoa.jp/demo8/wp-content/uploads/2017/03/pc_main_img.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
 
-<!-- 事業セクション（実HPの見出しベース） -->
-<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
-  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
-    <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
-    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">株式会社NEXCHAについて</h2>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:24px;">
-    
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">ホームページ制作について</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">モバイル・ファーストを念頭に、スマホ・タブレット対応のレスポンシブ制作を推奨。</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">ホームページ制作実績</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">東京・大阪・京都・神戸・宮崎など全国のコーポレートサイト制作実績あり。</div>
-      </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #cf2e2e;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
-        <div style="font-size:16px;font-weight:800;color:#cf2e2e;margin-bottom:8px;line-height:1.4;">保守サービス</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">制作後も安心。WordPressサイトの継続的な保守サポートを提供しております。</div>
-      </div>
-  </div>
-</section>
-
-<!-- AI提案セクション -->
-<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
-     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:40px;">
-      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 株式会社NEXCHA</div>
-      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
-      <p style="color:#555555;font-size:15px;line-height:1.9;">
-        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
-        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">提案書作成やコーディング補助にAIを活用し、Web制作の工数削減と提案品質向上が見込めます。</strong>
-      </p>
-    </div>
-    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
-         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="32">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;" class="count-target" data-target="400">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
-      </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#cf2e2e;">10<span style="font-size:22px;">万</span></div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-grad" style="padding:100px 40px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
-      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
-        まずはAIデモをご覧ください
-      </h2>
-      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
-        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
-      </p>
-    </div>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BENEXCHA様 AI研修のご相談" class="fade-up"
-       style="display:inline-block;background:#cf2e2e;color:#ffffff;
-            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
-            text-decoration:none;box-shadow:0 8px 40px #cf2e2e55;letter-spacing:.5px;
-            transition:transform .2s,box-shadow .2s;"
-       onmouseover="this.style.transform='scale(1.04)'"
-       onmouseout="this.style.transform='scale(1)'">
-      30分だけ話を聞いてみる →
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">お客様と共に成長を目指す</h1>
+    <p class="hero-en">株式会社NEXCHA</p>
+    <p class="hero-sub">WordPress・レスポンシブ制作で大阪から顧客と共に成長する会社</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
     </a>
-    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
-      強引な営業は一切しません
-    </p>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">N</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">お客様と共に成長を目指す</h2>
+      <p class="mission-en">株式会社NEXCHA</p>
+      <p class="mission-desc">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-神戸</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #cf2e2e;color:#cf2e2e;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        ホームページ制作について
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-京都</p>
+    </div>
+  </div>
+</section>
+
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">株式会社NEXCHAの事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/sp/menu01.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">ホームページ制作について</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">モバイルファーストのレスポンシブ制作を推奨</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/sp/menu03.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">事業内容</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">WordPress・Movable TypeなどCMSで幅広く対応</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/tel01.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">経営理念</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">目配り・気配り・おもてなしで価値あるサービスを提供</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#cf2e2e;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- フィーチャー -->
+<section id='features' style='padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;'>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 01</div>
+          <p style="font-size:15px;line-height:2;color:#333;">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-神戸</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://nexcha.co.jp/wp-content/themes/xeory_extension/lib/images/ttl01.png') center/cover;"></div>
+    </div>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row-reverse;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 02</div>
+          <p style="font-size:15px;line-height:2;color:#333;">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-京都</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('http://demo.whoa.jp/demo8/wp-content/uploads/2017/03/pc_main_img.jpg') center/cover;"></div>
+    </div></section>
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#cf2e2e;font-weight:700;letter-spacing:1px;border-bottom:1px solid #cf2e2e;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-神戸</span>
+      </li>
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">web制作-コーポレートサイト、レスポンシブ、ワードプレス、保守-京都</span>
+      </li>
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#cf2e2e;font-weight:700;letter-spacing:1px;"></span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">web制作- ポータルサイト、レスポンシブ、WordPress- 大阪</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">TEL</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">06-6210-4793</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#cf2e2e15,#cf2e2e30);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:400;color:#cf2e2e;opacity:0.15;line-height:1;font-family:'Yuji Syuku',serif;">N</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#cf2e2e;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        <div style='margin-top:12px;font-size:22px;font-weight:900;color:#333;letter-spacing:2px;'>06-6210-4793</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#cf2e2e;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × 株式会社NEXCHA</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#cf2e2e;">提案書・コーディング補助・SEO文章作成をAI化し制作効率を向上</strong>
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
+      </div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
+      </div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせフォーム -->
+<section id="cta-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">CONTACT</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;color:#1a1a1a;text-align:center;line-height:1.3;margin:16px 0 12px;">
+        まずはAIデモを見てみる
+      </h2>
+      <p style="text-align:center;font-size:14px;color:#888;line-height:1.9;margin-bottom:40px;">
+        選択するだけでOK。30秒で送れます。<br>強引な営業は一切しません。
+      </p>
+
+      <div style="background:#fff;padding:40px;border:1px solid #e8e8e8;">
+
+        <!-- ① ご希望のサービス -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">① ご希望のサービス（複数選択可）</div>
+          <label class="form-check"><input type="checkbox" name="service" value="HP制作・リニューアル"><span>HP制作・リニューアル</span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="AI研修"><span>AI研修</span></label>
+          <div style="border:1.5px solid #eee;padding:14px 16px;margin:0 0 6px;">
+            <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">業務自動化</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-left:4px;">
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：営業・見積書作成"><span>営業・見積書作成</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：請求書・経理処理"><span>請求書・経理処理</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：顧客対応・メール返信"><span>顧客対応・メール返信</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：現場報告書・日報作成"><span>現場報告書・日報作成</span></label>
+            </div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="service" value="補助金活用サポート"><span>補助金活用サポート<small style="color:#888;font-size:12px;margin-left:6px;">IT導入補助金・ものづくり補助金など</small></span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="まずは話だけ聞きたい"><span>まずは話だけ聞きたい</span></label>
+        </div>
+
+        <!-- ② ご相談の段階 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">② ご相談の段階</div>
+          <label class="form-radio"><input type="radio" name="stage" value="料金・見積もりを知りたい"><span>料金・見積もりを知りたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="サービス内容をもっと詳しく聞きたい"><span>サービス内容をもっと詳しく聞きたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="現地調査・訪問を依頼したい"><span>現地調査・訪問を依頼したい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="とりあえず気軽に相談したい"><span>とりあえず気軽に相談したい</span></label>
+        </div>
+
+        <!-- ③ 連絡方法 + ④ 時間帯 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">③ ご希望の連絡方法</div>
+            <label class="form-radio"><input type="radio" name="contact" value="電話で折り返してほしい"><span>電話で折り返してほしい</span></label>
+            <label class="form-radio"><input type="radio" name="contact" value="メールで返信してほしい"><span>メールで返信してほしい</span></label>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">④ 連絡可能な時間帯</div>
+            <label class="form-check"><input type="checkbox" name="time" value="午前中（9〜12時）"><span>午前中（9〜12時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="午後（12〜18時）"><span>午後（12〜18時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="夜間（18時〜）"><span>夜間（18時〜）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="いつでも可"><span>いつでも可</span></label>
+          </div>
+        </div>
+
+        <!-- ⑤ ご連絡先 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">⑤ ご連絡先</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">お名前 <span style="color:#cf2e2e;font-size:10px;">必須</span></label>
+              <input id="cf-name" type="text" placeholder="山田 太郎" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">市区町村</label>
+              <input id="cf-area" type="text" placeholder="碧南市" class="cf-input">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">電話番号</label>
+              <input id="cf-phone" type="tel" placeholder="0566-XX-XXXX" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">メールアドレス</label>
+              <input id="cf-email" type="email" placeholder="example@mail.com" class="cf-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 自由記述 -->
+        <div style="margin-bottom:32px;">
+          <label style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;display:block;margin-bottom:14px;">⑥ その他・ご要望（任意）</label>
+          <textarea id="cf-msg" rows="3" placeholder="なくてもOKです" class="cf-input" style="resize:vertical;line-height:1.8;"></textarea>
+        </div>
+
+        <button onclick="submitContactForm()" style="width:100%;background:#cf2e2e;color:#ffffff;font-size:16px;font-weight:700;padding:20px;border:none;cursor:pointer;letter-spacing:0.05em;transition:background .2s,transform .2s;"
+          onmouseover="this.style.background='#930000';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#cf2e2e';this.style.transform='translateY(0)'">
+          内容を確認してメールを送る　→
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:12px;color:#bbb;">お使いのメールアプリが開きます。送信ボタンを押すと完了です。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- フッター -->
-<footer style="padding:36px 40px;text-align:center;font-size:12px;
-     background:#f0f0f0;color:#888888;
-     border-top:1px solid #e0e0e0;">
-  このページは 株式会社NEXCHA 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">株式会社NEXCHA</div>
+  <div>このページは 株式会社NEXCHA 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
 </footer>
 
 <script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
 // スクロールアニメーション
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
 // カウントアップ
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
-    let cur = 0; const step = target / (dur/16);
-    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
     cio.unobserve(el);
   });
-}, {threshold:0.5});
-document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+function submitContactForm() {
+  const services = [...document.querySelectorAll('[name="service"]:checked')].map(el => el.value);
+  const stageEl = document.querySelector('[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : '（未選択）';
+  const contactEl = document.querySelector('[name="contact"]:checked');
+  const contact = contactEl ? contactEl.value : '（未選択）';
+  const times = [...document.querySelectorAll('[name="time"]:checked')].map(el => el.value);
+  const name = document.getElementById('cf-name').value.trim();
+  const area = document.getElementById('cf-area').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name) {
+    alert('お名前をご入力ください');
+    document.getElementById('cf-name').focus();
+    return;
+  }
+  let lines = [
+    '【ご希望のサービス】',
+    services.length ? services.map(s => '・' + s).join('\n') : '・（未選択）',
+    '', '【ご相談の段階】', '・' + stage,
+    '', '【ご希望の連絡方法】', '・' + contact,
+    '', '【連絡可能な時間帯】',
+    times.length ? times.map(t => '・' + t).join('\n') : '・（未選択）',
+    '', '【ご連絡先】', 'お名前：' + name
+  ];
+  if (area) lines.push('市区町村：' + area);
+  if (phone) lines.push('電話番号：' + phone);
+  if (email) lines.push('メールアドレス：' + email);
+  if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
+  lines.push('', '---', 'このお問い合わせは 株式会社NEXCHA 様のHPデモよりいただきました。');
+  const body = lines.join('\n');
+  window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('株式会社NEXCHA様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
+}
+
+
+(function(){
+  const s = document.querySelectorAll('.hslide');
+  if(!s.length) return;
+  let c = 0;
+  setInterval(()=>{
+    s[c].style.opacity = '0';
+    c = (c+1) % s.length;
+    s[c].style.opacity = '0.55';
+  }, 4500);
+})();
 </script>
 </body>
 </html>
