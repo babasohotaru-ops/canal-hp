@@ -138,11 +138,21 @@ a{text-decoration:none;color:inherit}
 .ai-stat-num{font-size:52px;font-weight:900;color:#cf2e2e;line-height:1;}
 .ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
 
-/* CTA */
+/* CTA / お問い合わせフォーム */
 #cta-section{
-  padding:120px 60px;text-align:center;
-  background:#fff;border-top:1px solid #eee;
+  padding:100px 60px;background:#fafafa;border-top:1px solid #eee;
 }
+.form-check,.form-radio{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:10px 14px;border:1.5px solid #eee;font-size:14px;
+  margin:0 0 6px;transition:border-color .2s;
+}
+.form-check:hover,.form-radio:hover{border-color:#cf2e2e;}
+.form-check input,.form-radio input{accent-color:#cf2e2e;width:16px;height:16px;flex-shrink:0;}
+.form-check-sub{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:#555;}
+.form-check-sub input{accent-color:#cf2e2e;width:14px;height:14px;flex-shrink:0;}
+.cf-input{width:100%;padding:10px 14px;border:1.5px solid #ddd;font-size:14px;outline:none;font-family:inherit;transition:border-color .2s;}
+.cf-input:focus{border-color:#cf2e2e;}
 
 /* フッター */
 #site-footer{
@@ -181,7 +191,7 @@ a{text-decoration:none;color:inherit}
     <nav>
       <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">お問い合わせ</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホーム home</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">サービス案内 サービス案内</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">鈑金塗装</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">車検整備</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">故障・事故車修理</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">カスタマイズ</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">各種保険</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#cf2e2e;transition:width .25s ease;"></span></li></ul>
     </nav>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E6%9D%89%E6%B5%A6%E8%87%AA%E5%8B%95%E8%BB%8A様 AI研修のご相談" class="header-cta">お問い合わせ</a>
+    <a href="#cta-section" class="header-cta">お問い合わせ</a>
   </div>
 </header>
 
@@ -375,26 +385,101 @@ a{text-decoration:none;color:inherit}
   </div>
 </section>
 
-<!-- CTA -->
-<section id="cta-section" style="padding:120px 60px;text-align:center;background:#fff;border-top:1px solid #eee;">
-  <div style="max-width:640px;margin:0 auto;">
+<!-- お問い合わせフォーム -->
+<section id="cta-section">
+  <div style="max-width:700px;margin:0 auto;">
     <div class="fade-up">
-      <div class="sec-label" style="text-align:center;">NEXT STEP</div>
-      <h2 style="font-size:clamp(26px,5vw,48px);font-weight:900;color:#1a1a1a;line-height:1.2;margin:16px 0 24px;">
+      <div class="sec-label" style="text-align:center;">CONTACT</div>
+      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;color:#1a1a1a;text-align:center;line-height:1.3;margin:16px 0 12px;">
         30分・無料相談はこちら
       </h2>
-      <p style="font-size:15px;color:#888;line-height:2;margin-bottom:48px;">
-        30分のオンライン相談から。<br>費用・資料送付など気軽にご相談ください。
+      <p style="text-align:center;font-size:14px;color:#888;line-height:1.9;margin-bottom:40px;">
+        選択するだけでOK。30秒で送れます。<br>強引な営業は一切しません。
       </p>
-      <a href="mailto:baba.so.hotaru@gmail.com?subject=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E6%9D%89%E6%B5%A6%E8%87%AA%E5%8B%95%E8%BB%8A様 AI研修のご相談" style="display:inline-flex;align-items:center;gap:16px;
-           background:#cf2e2e;color:#ffffff;font-size:16px;font-weight:700;
-           padding:20px 56px;letter-spacing:0.05em;
-           transition:background .2s,transform .2s;"
-         onmouseover="this.style.background='#930000';this.style.transform='translateY(-2px)'"
-         onmouseout="this.style.background='#cf2e2e';this.style.transform='translateY(0)'">
-        30分だけ話を聞いてみる　→
-      </a>
-      <p style="margin-top:20px;font-size:12px;color:#bbb;">強引な営業は一切しません</p>
+
+      <div style="background:#fff;padding:40px;border:1px solid #e8e8e8;">
+
+        <!-- ① ご希望のサービス -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">① ご希望のサービス（複数選択可）</div>
+          <label class="form-check"><input type="checkbox" name="service" value="HP制作・リニューアル"><span>HP制作・リニューアル</span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="AI研修"><span>AI研修</span></label>
+          <div style="border:1.5px solid #eee;padding:14px 16px;margin:0 0 6px;">
+            <div style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">業務自動化</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-left:4px;">
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：営業・見積書作成"><span>営業・見積書作成</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：請求書・経理処理"><span>請求書・経理処理</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：顧客対応・メール返信"><span>顧客対応・メール返信</span></label>
+              <label class="form-check-sub"><input type="checkbox" name="service" value="業務自動化：現場報告書・日報作成"><span>現場報告書・日報作成</span></label>
+            </div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="service" value="補助金活用サポート"><span>補助金活用サポート<small style="color:#888;font-size:12px;margin-left:6px;">IT導入補助金・ものづくり補助金など</small></span></label>
+          <label class="form-check"><input type="checkbox" name="service" value="まずは話だけ聞きたい"><span>まずは話だけ聞きたい</span></label>
+        </div>
+
+        <!-- ② ご相談の段階 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">② ご相談の段階</div>
+          <label class="form-radio"><input type="radio" name="stage" value="料金・見積もりを知りたい"><span>料金・見積もりを知りたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="サービス内容をもっと詳しく聞きたい"><span>サービス内容をもっと詳しく聞きたい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="現地調査・訪問を依頼したい"><span>現地調査・訪問を依頼したい</span></label>
+          <label class="form-radio"><input type="radio" name="stage" value="とりあえず気軽に相談したい"><span>とりあえず気軽に相談したい</span></label>
+        </div>
+
+        <!-- ③ 連絡方法 + ④ 時間帯 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:32px;">
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">③ ご希望の連絡方法</div>
+            <label class="form-radio"><input type="radio" name="contact" value="電話で折り返してほしい"><span>電話で折り返してほしい</span></label>
+            <label class="form-radio"><input type="radio" name="contact" value="メールで返信してほしい"><span>メールで返信してほしい</span></label>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">④ 連絡可能な時間帯</div>
+            <label class="form-check"><input type="checkbox" name="time" value="午前中（9〜12時）"><span>午前中（9〜12時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="午後（12〜18時）"><span>午後（12〜18時）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="夜間（18時〜）"><span>夜間（18時〜）</span></label>
+            <label class="form-check"><input type="checkbox" name="time" value="いつでも可"><span>いつでも可</span></label>
+          </div>
+        </div>
+
+        <!-- ⑤ ご連絡先 -->
+        <div style="margin-bottom:32px;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;margin-bottom:14px;">⑤ ご連絡先</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">お名前 <span style="color:#cf2e2e;font-size:10px;">必須</span></label>
+              <input id="cf-name" type="text" placeholder="山田 太郎" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">市区町村</label>
+              <input id="cf-area" type="text" placeholder="碧南市" class="cf-input">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">電話番号</label>
+              <input id="cf-phone" type="tel" placeholder="0566-XX-XXXX" class="cf-input">
+            </div>
+            <div>
+              <label style="font-size:12px;color:#555;display:block;margin-bottom:6px;">メールアドレス</label>
+              <input id="cf-email" type="email" placeholder="example@mail.com" class="cf-input">
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ 自由記述 -->
+        <div style="margin-bottom:32px;">
+          <label style="font-size:11px;font-weight:800;letter-spacing:3px;color:#cf2e2e;display:block;margin-bottom:14px;">⑥ その他・ご要望（任意）</label>
+          <textarea id="cf-msg" rows="3" placeholder="なくてもOKです" class="cf-input" style="resize:vertical;line-height:1.8;"></textarea>
+        </div>
+
+        <button onclick="submitContactForm()" style="width:100%;background:#cf2e2e;color:#ffffff;font-size:16px;font-weight:700;padding:20px;border:none;cursor:pointer;letter-spacing:0.05em;transition:background .2s,transform .2s;"
+          onmouseover="this.style.background='#930000';this.style.transform='translateY(-2px)'"
+          onmouseout="this.style.background='#cf2e2e';this.style.transform='translateY(0)'">
+          内容を確認してメールを送る　→
+        </button>
+        <p style="text-align:center;margin-top:12px;font-size:12px;color:#bbb;">お使いのメールアプリが開きます。送信ボタンを押すと完了です。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -438,6 +523,44 @@ const cio = new IntersectionObserver(entries=>{
   });
 },{threshold:0.5});
 document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+function submitContactForm() {
+  const services = [...document.querySelectorAll('[name="service"]:checked')].map(el => el.value);
+  const stageEl = document.querySelector('[name="stage"]:checked');
+  const stage = stageEl ? stageEl.value : '（未選択）';
+  const contactEl = document.querySelector('[name="contact"]:checked');
+  const contact = contactEl ? contactEl.value : '（未選択）';
+  const times = [...document.querySelectorAll('[name="time"]:checked')].map(el => el.value);
+  const name = document.getElementById('cf-name').value.trim();
+  const area = document.getElementById('cf-area').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  if (!name) {
+    alert('お名前をご入力ください');
+    document.getElementById('cf-name').focus();
+    return;
+  }
+  let lines = [
+    '【ご希望のサービス】',
+    services.length ? services.map(s => '・' + s).join('
+') : '・（未選択）',
+    '', '【ご相談の段階】', '・' + stage,
+    '', '【ご希望の連絡方法】', '・' + contact,
+    '', '【連絡可能な時間帯】',
+    times.length ? times.map(t => '・' + t).join('
+') : '・（未選択）',
+    '', '【ご連絡先】', 'お名前：' + name
+  ];
+  if (area) lines.push('市区町村：' + area);
+  if (phone) lines.push('電話番号：' + phone);
+  if (email) lines.push('メールアドレス：' + email);
+  if (msg) { lines.push(''); lines.push('【その他ご要望】'); lines.push(msg); }
+  lines.push('', '---', 'このお問い合わせは 株式会社杉浦自動車 様のHPデモよりいただきました。');
+  const body = lines.join('
+');
+  window.location.href = 'mailto:baba.so.hotaru@gmail.com?subject=' + encodeURIComponent('株式会社杉浦自動車様 Canal AI お問い合わせ') + '&body=' + encodeURIComponent(body);
+}
 
 
 (function(){
