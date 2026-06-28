@@ -4,198 +4,442 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>安城印刷株式会社 | AIリニューアルサンプル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#ffffff;color:#1a1a1a;font-family:'Hiragino Sans','Meiryo',sans-serif;line-height:1.8;overflow-x:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;color:#1a1a1a;font-family:'Noto Sans JP',sans-serif;line-height:1.8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
 
-  @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes shimmer{0%{left:-100%}100%{left:100%}}
+/* ヘッダー */
+#site-header{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#fff;border-bottom:1px solid #eee;
+  height:68px;display:flex;align-items:stretch;
+}
+.header-accent{width:4px;background:#0E0C96;flex-shrink:0}
+.header-inner{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.nav-list{display:flex;list-style:none;gap:40px;}
+.nav-item:hover .nav-line{width:100%!important}
+.nav-item:hover .nav-link{color:#0E0C96!important}
+.header-cta{
+  background:#0E0C96;color:#ffffff;font-size:13px;font-weight:700;
+  padding:0 28px;display:flex;align-items:center;letter-spacing:0.05em;
+  cursor:pointer;border:none;transition:background .2s;white-space:nowrap;
+  flex-shrink:0;
+}
+.header-cta:hover{background:#00005a;}
 
-  .anim-down{animation:fadeDown .7s ease both}
-  .anim-up1{animation:fadeUp .8s .15s ease both}
-  .anim-up2{animation:fadeUp .8s .30s ease both}
-  .anim-up3{animation:fadeUp .8s .45s ease both}
+/* ヒーロー */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#111;
+}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.6) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:900px;}
+.hero-badge{
+  display:inline-block;border:1px solid rgba(255,255,255,0.4);
+  color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;
+  letter-spacing:3px;padding:6px 20px;margin-bottom:32px;
+  animation:fadeDown .8s ease both;
+}
+.hero-h1{
+  font-size:clamp(36px,7vw,72px);font-weight:900;color:#fff;
+  line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.5);
+  animation:fadeUp .9s .2s ease both;
+}
+.hero-en{
+  font-size:clamp(13px,1.8vw,17px);color:rgba(255,255,255,0.65);
+  letter-spacing:0.15em;margin-bottom:48px;
+  animation:fadeUp .9s .35s ease both;
+}
+.hero-sub{
+  font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,0.85);
+  margin-bottom:52px;line-height:1.9;
+  animation:fadeUp .9s .5s ease both;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#0E0C96;color:#ffffff;font-size:15px;font-weight:700;
+  padding:18px 48px;letter-spacing:0.05em;cursor:pointer;
+  transition:background .2s,transform .2s;
+  animation:fadeUp .9s .65s ease both;
+}
+.hero-btn:hover{background:#00005a;transform:translateY(-2px)}
+.scroll-ind{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;
+  animation:fadeUp 1s 1s ease both;
+}
+.scroll-line{
+  width:1px;height:60px;background:rgba(255,255,255,0.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;
+  background:rgba(255,255,255,0.8);
+  animation:scrollDrop 1.8s ease infinite;
+}
 
-  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-  .fade-up.visible{opacity:1;transform:translateY(0)}
+/* ミッションセクション */
+#mission{
+  position:relative;padding:120px 60px;background:#fff;overflow:hidden;
+}
+.mission-wm{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(200px,30vw,400px);font-weight:900;color:rgba(0,0,0,0.03);
+  pointer-events:none;white-space:nowrap;line-height:1;user-select:none;
+}
+.label-badge{
+  display:inline-block;background:#0E0C96;color:#ffffff;
+  font-size:13px;font-weight:700;padding:6px 20px;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.mission-h2{
+  font-size:clamp(28px,5vw,56px);font-weight:900;
+  letter-spacing:0.1em;line-height:1.3;color:#1a1a1a;margin-bottom:16px;
+}
+.mission-en{
+  font-size:clamp(12px,1.5vw,15px);color:#999;letter-spacing:0.2em;margin-bottom:40px;
+}
+.mission-desc{font-size:15px;color:#555;line-height:2;max-width:640px;}
 
-  .card:hover{transform:translateY(-5px)!important;box-shadow:0 16px 40px rgba(0,0,0,.35)!important}
-  .card{transition:transform .25s ease,box-shadow .25s ease}
+/* サービスグリッド */
+#services{padding:100px 60px;background:#f7f7f7;}
+.sec-label{font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px;}
+.sec-h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#1a1a1a;margin-bottom:48px;}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.svc-card:hover .svc-overlay{background:linear-gradient(to top,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.2) 60%)!important}
 
-  .cta-grad{
-    background:linear-gradient(270deg,#0E0C9655,#ffffff,#0E0C9633,#ffffff);
-    background-size:400% 400%;
-    animation:gradShift 7s ease infinite;
-  }
+/* フィーチャー */
+#features{padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;}
 
-  .badge-ai{
-    position:relative;overflow:hidden;
-    background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
-    display:inline-block;padding:6px 20px;border-radius:20px;
-    font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,0.7);
-  }
-  .badge-ai::after{
-    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
-    animation:shimmer 2.5s infinite;
-  }
+/* ニュース */
+#news{padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;}
+.news-list{list-style:none;}
+
+/* 会社情報 */
+#company{padding:100px 0;background:#f7f7f7;}
+.company-inner{max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.ci-table{width:100%;border-collapse:collapse;}
+
+/* AI提案 */
+#ai-section{
+  padding:120px 60px;
+  background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#111 100%);
+  color:#fff;
+}
+.ai-inner{max-width:1000px;margin:0 auto;}
+.ai-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.ai-stat{background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;}
+.ai-stat-num{font-size:52px;font-weight:900;color:#0E0C96;line-height:1;}
+.ai-stat-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:12px;}
+
+/* CTA */
+#cta-section{
+  padding:120px 60px;text-align:center;
+  background:#fff;border-top:1px solid #eee;
+}
+
+/* フッター */
+#site-footer{
+  background:#111;color:rgba(255,255,255,0.4);
+  padding:40px 60px;font-size:12px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+
+/* アニメーション */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollDrop{0%{top:-100%}100%{top:100%}}
+
+.fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up.d1{transition-delay:.1s}
+.fade-up.d2{transition-delay:.2s}
+.fade-up.d3{transition-delay:.3s}
+
+/* レスポンシブ */
+@media(max-width:768px){
+  .nav-list{display:none}
+  .company-inner{grid-template-columns:1fr}
+  .ai-stats{grid-template-columns:1fr}
+  #mission,.header-inner,#services,#features,#news,#cta-section,#site-footer{padding-left:24px;padding-right:24px}
+}
 </style>
 </head>
 <body>
 
-<!-- ヘッダー（実ナビそのまま） -->
-<header style="background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);
-     border-bottom:1px solid #e0e0e0;
-     padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;
-     position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
-  <div><img src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="安城印刷株式会社" style="height:40px;max-width:160px;object-fit:contain;"></div>
-  <nav style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;"><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">安城印刷株式会社</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">0566-75-1188</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">ホーム</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">業務内容</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">イチオシ情報</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">取扱内容</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">会社概要</a><a href="#" style="font-size:13px;color:#333333;text-decoration:none;padding:6px 4px;transition:color .2s;" onmouseover="this.style.color='#0E0C96'" onmouseout="this.style.color='#333333'">MAP</a></nav>
+<!-- ヘッダー -->
+<header id="site-header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div><img src="data:image/vnd.microsoft.icon;base64,AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//w==" alt="安城印刷株式会社" style="height:36px;max-width:140px;object-fit:contain;"></div>
+    <nav>
+      <ul class="nav-list"><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">安城印刷株式会社</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">0566-75-1188</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">ホーム</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#company" class="nav-link" onclick="smoothTo('company');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">業務内容</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#ai-section" class="nav-link" onclick="smoothTo('ai-section');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">イチオシ情報</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#mission" class="nav-link" onclick="smoothTo('mission');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">取扱内容</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#services" class="nav-link" onclick="smoothTo('services');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">会社概要</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li><li class="nav-item" style="position:relative;"><a href="#news" class="nav-link" onclick="smoothTo('news');return false;" style="font-size:14px;color:#333;text-decoration:none;padding:8px 0;display:block;letter-spacing:0.02em;transition:color .2s;">MAP</a><span class="nav-line" style="position:absolute;bottom:0;left:0;width:0;height:2px;background:#0E0C96;transition:width .25s ease;"></span></li></ul>
+    </nav>
+    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE様 AI研修のご相談" class="header-cta">お問い合わせ</a>
+  </div>
 </header>
 
 <!-- ヒーロー -->
-<section style="min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     text-align:center;padding:80px 32px;background:#111;position:relative;">
-  <img src="data:image/jpeg;base64,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" alt="安城印刷株式会社" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.65;">
-  <div style="max-width:760px;position:relative;z-index:1;">
-    <div class="badge-ai anim-down" style="margin-bottom:28px;">✨ AI POWERED RENEWAL SAMPLE</div>
-    <h1 class="anim-up1" style="font-size:clamp(30px,6.5vw,60px);font-weight:900;
-         line-height:1.15;margin-bottom:22px;color:#ffffff;
-         text-shadow:0 2px 20px rgba(0,0,0,0.8);">
-      印刷のことなら、安城印刷。
-    </h1>
-    <p class="anim-up2" style="font-size:clamp(14px,2.2vw,19px);color:rgba(255,255,255,0.88);
-         margin-bottom:48px;text-shadow:0 1px 8px rgba(0,0,0,.5);">
-      創業80年。企画提案からパンフ・チラシ・シール印刷まで。
-    </p>
-    <div class="anim-up3">
-      <a href="#ai-section" style="display:inline-block;background:#0E0C96;color:#ffffff;
-           font-size:16px;font-weight:900;padding:16px 44px;border-radius:50px;
-           text-decoration:none;box-shadow:0 8px 32px #0E0C9666;margin-right:16px;
-           transition:transform .2s,box-shadow .2s;"
-         onmouseover="this.style.transform='scale(1.04)'"
-         onmouseout="this.style.transform='scale(1)'">
-        AIリニューアルの詳細を見る
-      </a>
+<section id="hero">
+  <div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_28f023e3068d40808b7b0afa380cb52e~mv2.png/v1/fill/w_157,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E3%83%AD%E3%82%B42.png') center/cover;opacity:0.55;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/11062b_a3d036fd609b49e1b2b4dace198cb392~mv2.jpg/v1/fill/w_197,h_131,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/11062b_a3d036fd609b49e1b2b4dace198cb392~mv2.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_b8c873091e134c5ea8b6ab93cb25c389~mv2.png/v1/fill/w_165,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E3%83%AD%E3%82%B4_%E3%83%9E%E3%83%BC%E3%82%AF.png') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_9cbdb8b3338d40378535572f7c899b0d~mv2.jpg/v1/fill/w_113,h_54,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/825e66_9cbdb8b3338d40378535572f7c899b0d~mv2.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+<div class="hslide" style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_0dab31385beb400998c7fbab91118257~mv2.jpg/v1/fill/w_108,h_80,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/825e66_0dab31385beb400998c7fbab91118257~mv2.jpg') center/cover;opacity:0;transition:opacity 1.4s ease;"></div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AI POWERED RENEWAL SAMPLE</div>
+    <h1 class="hero-h1">創業80年の印刷技術を今に</h1>
+    <p class="hero-en">安城印刷株式会社</p>
+    <p class="hero-sub">チラシ・カタログ・DM・社内報まで安城の印刷会社</p>
+    <a href="#mission" onclick="smoothTo('mission');return false;" class="hero-btn">
+      詳しく見る　→
+    </a>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ミッション -->
+<section id="mission" style="padding:120px 60px;">
+  <div class="mission-wm">安</div>
+  <div style="position:relative;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="label-badge">使命</div>
+      <h2 class="mission-h2">創業80年の印刷技術を今に</h2>
+      <p class="mission-en">安城印刷株式会社</p>
+      <p class="mission-desc">チ ラシ印刷／ ポスター印刷／ DM印刷／ チケット印刷／ シール印刷／ ペーパーバック／ 包装紙／社内報／</p>
+    </div>
+    <div class="fade-up d2">
+      <div class="label-badge" style="background:transparent;border:2px solid #0E0C96;color:#0E0C96;">理念</div>
+      <h2 style="font-size:clamp(22px,3.5vw,40px);font-weight:900;letter-spacing:0.08em;line-height:1.4;color:#1a1a1a;margin:16px 0 24px;">
+        安城印刷株式会社
+      </h2>
+      <p style="font-size:14px;color:#555;line-height:2;">創業以来80年にわたる実績と蓄積された高度な印刷技術</p>
     </div>
   </div>
 </section>
 
-<!-- 事業セクション（実HPの見出しベース） -->
-<section style="padding:96px 40px;max-width:1040px;margin:0 auto;">
-  <div class="fade-up" style="text-align:center;margin-bottom:52px;">
-    <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:12px;text-transform:uppercase;">ABOUT US</div>
-    <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:900;">安城印刷株式会社について</h2>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:24px;">
-    
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #0E0C96;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🏭</div>
-        <div style="font-size:16px;font-weight:800;color:#0E0C96;margin-bottom:8px;line-height:1.4;">業務内容</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">チラシ・カタログ・DM・シールなど幅広く対応。</div>
+<!-- サービス -->
+<section id="services" style="padding:100px 60px;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label">サービス</div>
+      <h2 class="sec-h2">安城印刷株式会社の事業</h2>
+    </div>
+    <div class="svc-grid">
+      
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_28f023e3068d40808b7b0afa380cb52e~mv2.png/v1/fill/w_157,h_25,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E3%83%AD%E3%82%B42.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">01</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">チラシ・ポスター印刷</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">単色〜フルカラー・小ロットから大部数まで柔軟対応</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#0E0C96;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #0E0C96;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">⚙️</div>
-        <div style="font-size:16px;font-weight:800;color:#0E0C96;margin-bottom:8px;line-height:1.4;">高度な印刷技術</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">80年の実績で蓄積したノウハウ。</div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/11062b_a3d036fd609b49e1b2b4dace198cb392~mv2.jpg/v1/fill/w_197,h_131,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/11062b_a3d036fd609b49e1b2b4dace198cb392~mv2.jpg') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">02</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">パンフレット・カタログ</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">会社案内・商品カタログ・ウエディングパンフまで</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#0E0C96;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
-      <div class="card fade-up" style="background:#f5f5f5;
-           border:1px solid #e0e0e0;border-top:3px solid #0E0C96;
-           border-radius:12px;padding:28px 24px;flex:1;min-width:220px;">
-        <div style="font-size:32px;margin-bottom:14px;">🔧</div>
-        <div style="font-size:16px;font-weight:800;color:#0E0C96;margin-bottom:8px;line-height:1.4;">企画提案型の印刷</div>
-        <div style="font-size:14px;color:#555555;line-height:1.7;">未来型企業としてお客様の課題を解決。</div>
+    </div>
+    <div class="svc-card fade-up" style="position:relative;overflow:hidden;border-radius:4px;
+         background:#1a1a1a;cursor:pointer;aspect-ratio:4/3;">
+      <div style="position:absolute;inset:0;background:url('https://static.wixstatic.com/media/825e66_b8c873091e134c5ea8b6ab93cb25c389~mv2.png/v1/fill/w_165,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E3%83%AD%E3%82%B4_%E3%83%9E%E3%83%BC%E3%82%AF.png') center/cover;opacity:0.7;transition:opacity .4s;"></div>
+      <div class="svc-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%);"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:24px 20px;">
+        <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase;">03</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:8px;">DM・シール・社内報</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;">手書き原稿からの制作・折り込み手配も一括対応</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;color:#0E0C96;font-size:13px;font-weight:700;">
+          詳しく見る <span style="font-size:16px;">→</span>
+        </div>
       </div>
+    </div>
+    </div>
   </div>
 </section>
 
-<!-- AI提案セクション -->
-<section id="ai-section" style="padding:96px 40px;background:rgba(255,255,255,0.02);
-     border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);">
-  <div style="max-width:760px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:40px;">
-      <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:12px;">AI × 安城印刷株式会社</div>
-      <h2 style="font-size:clamp(20px,3.5vw,32px);font-weight:900;margin-bottom:16px;color:#1a1a1a;">このHPはAIで作られました</h2>
-      <p style="color:#555555;font-size:15px;line-height:1.9;">
-        このページは御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
-        Canal AIの研修を受ければ、<strong style="color:#0E0C96;">企画提案書やキャッチコピーの草案、校正をAIで時短し、印刷とお客様提案に集中できます。</strong>
+<!-- フィーチャー -->
+<section id='features' style='padding:100px 60px;background:#fff;max-width:1100px;margin:0 auto;'>
+    <div class="fade-up" style="display:flex;gap:48px;flex-wrap:wrap;align-items:center;
+         margin-bottom:72px;flex-direction:row;">
+      <div style="flex:1;min-width:280px;padding:16px 0;">
+          <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:3px;margin-bottom:16px;text-transform:uppercase;">FEATURE 01</div>
+          <p style="font-size:15px;line-height:2;color:#333;">チ ラシ印刷／ ポスター印刷／ DM印刷／ チケット印刷／ シール印刷／ ペーパーバック／ 包装紙／社内報／</p>
+        </div><div style="flex:1;min-width:280px;border-radius:4px;overflow:hidden;aspect-ratio:16/9;background:url('https://static.wixstatic.com/media/825e66_9cbdb8b3338d40378535572f7c899b0d~mv2.jpg/v1/fill/w_113,h_54,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/825e66_9cbdb8b3338d40378535572f7c899b0d~mv2.jpg') center/cover;"></div>
+    </div></section>
+
+<!-- ニュース -->
+<section id="news" style="padding:100px 60px;background:#fff;max-width:900px;margin:0 auto;">
+  <div class="fade-up" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div class="sec-label">お知らせ</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;color:#1a1a1a;">NEWS</h2>
+    </div>
+    <a href="#" style="font-size:13px;color:#0E0C96;font-weight:700;letter-spacing:1px;border-bottom:1px solid #0E0C96;padding-bottom:2px;">すべて見る →</a>
+  </div>
+  <ul class="news-list">
+      <li class="fade-up" style="display:grid;grid-template-columns:100px 1fr;gap:24px;
+           padding:20px 0;border-bottom:1px solid #e8e8e8;align-items:center;">
+        <span style="font-size:12px;color:#0E0C96;font-weight:700;letter-spacing:1px;">2024.03</span>
+        <span style="font-size:15px;color:#333;line-height:1.7;">最新情報は公式HPをご覧ください</span>
+      </li></ul>
+</section>
+
+<!-- 会社情報 -->
+<section id="company" style="padding:100px 0;background:#f7f7f7;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;flex-wrap:wrap;">
+    <div class="fade-up">
+      <div class="sec-label">会社情報</div>
+      <h2 style="font-size:clamp(22px,3.5vw,36px);font-weight:900;margin-bottom:40px;color:#1a1a1a;">COMPANY</h2>
+      <table class="ci-table">
+        <tbody>
+        <tr>
+          <th style="padding:16px 20px 16px 0;font-size:12px;color:#888;font-weight:700;
+               letter-spacing:1px;white-space:nowrap;vertical-align:top;border-bottom:1px solid #eee;">TEL</th>
+          <td style="padding:16px 0;font-size:14px;color:#333;line-height:1.8;border-bottom:1px solid #eee;">0566-75-1188</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="fade-up d2" style="background:linear-gradient(135deg,#0E0C9615,#0E0C9630);
+         border-radius:4px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+      <div style="font-size:clamp(80px,15vw,160px);font-weight:900;color:#0E0C96;opacity:0.12;line-height:1;">安</div>
+      <div style="position:absolute;bottom:32px;left:32px;right:32px;">
+        <div style="font-size:13px;color:#0E0C96;font-weight:700;margin-bottom:8px;">所在地</div>
+        <div style="font-size:14px;color:#333;line-height:1.8;">愛知県</div>
+        <div style='margin-top:12px;font-size:22px;font-weight:900;color:#333;letter-spacing:2px;'>0566-75-1188</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI提案 -->
+<section id="ai-section" style="padding:120px 60px;background:linear-gradient(135deg,#0f0f0f,#1a1a1a);color:#fff;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="fade-up" style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#0E0C96;font-weight:800;letter-spacing:4px;margin-bottom:16px;">AI × 安城印刷株式会社</div>
+      <h2 style="font-size:clamp(26px,5vw,52px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:24px;">
+        このHPは<br>AIで作られました
+      </h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.6);line-height:2;max-width:580px;">
+        御社の公式HPをもとに、AIが自動でリニューアルしたサンプルです。<br>
+        Canal AIの研修を受ければ、<strong style="color:#0E0C96;">提案書・見積書・企画文案をAIで自動作成し提案力を強化</strong>
       </p>
     </div>
-    <div class="fade-up" style="background:#f5f5f5;border:1px solid #e0e0e0;
-         border-radius:16px;padding:28px 32px;display:flex;flex-wrap:wrap;gap:32px;">
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#0E0C96;" class="count-target" data-target="32">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">グループ導入企業</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;">
+      <div class="fade-up" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="32" style="font-size:52px;font-weight:900;color:#0E0C96;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">グループ導入企業</div>
       </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#0E0C96;" class="count-target" data-target="400">0</div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">受講者数（名）</div>
+      <div class="fade-up d1" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div class="count-target" data-target="400" style="font-size:52px;font-weight:900;color:#0E0C96;line-height:1;">0</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">受講者数（名）</div>
       </div>
-      <div style="flex:1;min-width:180px;text-align:center;">
-        <div style="font-size:44px;font-weight:900;color:#0E0C96;">10<span style="font-size:22px;">万</span></div>
-        <div style="font-size:13px;color:#555555;margin-top:4px;">助成金後の実質費用/人</div>
+      <div class="fade-up d2" style="background:rgba(255,255,255,0.04);padding:40px 32px;text-align:center;">
+        <div style="font-size:52px;font-weight:900;color:#0E0C96;line-height:1;">10<span style="font-size:28px;">万</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px;letter-spacing:1px;">助成金後の実質費用/人</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-grad" style="padding:100px 40px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;">
-    <div class="fade-up" style="margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:3px;color:rgba(255,255,255,0.6);margin-bottom:16px;">NEXT STEP</div>
-      <h2 style="font-size:clamp(22px,4vw,36px);font-weight:900;margin-bottom:16px;color:#ffffff;">
-        まずはAIデモを見てみる
+<section id="cta-section" style="padding:120px 60px;text-align:center;background:#fff;border-top:1px solid #eee;">
+  <div style="max-width:640px;margin:0 auto;">
+    <div class="fade-up">
+      <div class="sec-label" style="text-align:center;">NEXT STEP</div>
+      <h2 style="font-size:clamp(26px,5vw,48px);font-weight:900;color:#1a1a1a;line-height:1.2;margin:16px 0 24px;">
+        30分・無料相談はこちら
       </h2>
-      <p style="color:#555555;font-size:14px;margin-bottom:40px;">
-        30分のオンライン相談から。費用・資料送付など気軽にご相談ください。
+      <p style="font-size:15px;color:#888;line-height:2;margin-bottom:48px;">
+        30分のオンライン相談から。<br>費用・資料送付など気軽にご相談ください。
       </p>
+      <a href="mailto:baba.so.hotaru@gmail.com?subject=%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE様 AI研修のご相談" style="display:inline-flex;align-items:center;gap:16px;
+           background:#0E0C96;color:#ffffff;font-size:16px;font-weight:700;
+           padding:20px 56px;letter-spacing:0.05em;
+           transition:background .2s,transform .2s;"
+         onmouseover="this.style.background='#00005a';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.background='#0E0C96';this.style.transform='translateY(0)'">
+        30分だけ話を聞いてみる　→
+      </a>
+      <p style="margin-top:20px;font-size:12px;color:#bbb;">強引な営業は一切しません</p>
     </div>
-    <a href="mailto:baba.so.hotaru@gmail.com?subject=%E5%AE%89%E5%9F%8E%E5%8D%B0%E5%88%B7%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE様 AI研修のご相談" class="fade-up"
-       style="display:inline-block;background:#0E0C96;color:#ffffff;
-            font-size:18px;font-weight:900;padding:20px 60px;border-radius:50px;
-            text-decoration:none;box-shadow:0 8px 40px #0E0C9655;letter-spacing:.5px;
-            transition:transform .2s,box-shadow .2s;"
-       onmouseover="this.style.transform='scale(1.04)'"
-       onmouseout="this.style.transform='scale(1)'">
-      30分だけ話を聞いてみる →
-    </a>
-    <p style="margin-top:24px;font-size:12px;color:rgba(255,255,255,0.3);">
-      強引な営業は一切しません
-    </p>
   </div>
 </section>
 
 <!-- フッター -->
-<footer style="padding:36px 40px;text-align:center;font-size:12px;
-     background:#f0f0f0;color:#888888;
-     border-top:1px solid #e0e0e0;">
-  このページは 安城印刷株式会社 様へのAIリニューアルサンプルです｜Canal AI / Hotaru&amp;Co ｜ baba.so.hotaru@gmail.com
+<footer id="site-footer">
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);">安城印刷株式会社</div>
+  <div>このページは 安城印刷株式会社 様へのAIリニューアルサンプルです　|　Canal AI / Hotaru&amp;Co　|　baba.so.hotaru@gmail.com</div>
 </footer>
 
 <script>
+// スムーススクロール
+function smoothTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ヘッダー高さ分オフセット
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){ e.preventDefault(); const top = el.getBoundingClientRect().top + window.scrollY - 68; window.scrollTo({top,behavior:'smooth'}); }
+  });
+});
+
 // スクロールアニメーション
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+},{threshold:0.1,rootMargin:'0px 0px -48px 0px'});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 
 // カウントアップ
-const cio = new IntersectionObserver(entries => {
-  entries.forEach(e => {
+const cio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
     if(!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target), dur = 1200;
-    let cur = 0; const step = target / (dur/16);
-    const t = setInterval(() => { cur = Math.min(cur+step, target); el.textContent = Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); }, 16);
+    const el=e.target, target=parseInt(el.dataset.target), dur=1400;
+    let cur=0; const step=target/(dur/16);
+    const t=setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=Math.floor(cur).toLocaleString(); if(cur>=target) clearInterval(t); },16);
     cio.unobserve(el);
   });
-}, {threshold:0.5});
-document.querySelectorAll('.count-target').forEach(el => cio.observe(el));
+},{threshold:0.5});
+document.querySelectorAll('.count-target').forEach(el=>cio.observe(el));
+
+
+(function(){
+  const s = document.querySelectorAll('.hslide');
+  if(!s.length) return;
+  let c = 0;
+  setInterval(()=>{
+    s[c].style.opacity = '0';
+    c = (c+1) % s.length;
+    s[c].style.opacity = '0.55';
+  }, 4500);
+})();
 </script>
 </body>
 </html>
